@@ -94,10 +94,13 @@ function Panel({
 }) {
   return (
     <div className="min-w-0">
-      <div className="mb-4">
-        <p className="font-medium">{title}</p>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">{subtitle}</p>
-      </div>
+      <p className="mb-4 flex flex-wrap items-baseline gap-x-2">
+        <span className="font-medium">{title}</span>
+        <span aria-hidden className="text-zinc-300 dark:text-zinc-600">
+          |
+        </span>
+        <span className="text-xs text-zinc-500 dark:text-zinc-400">{subtitle}</span>
+      </p>
       <div className="mb-4">{controls}</div>
       <div className={`flex min-h-[340px] items-center justify-center rounded-xl p-5 sm:p-8 ${SURFACE}`}>
         <div className="w-full max-w-md">{children}</div>

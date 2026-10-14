@@ -532,6 +532,7 @@ Brand         195`}
               <div className="mt-14">
                 <BeforeAfter
                   title="Elastic component architecture — HP Hero"
+                  compareFirst
                   before={<ImageSlot {...IMAGES.layoutBefore} aspect="aspect-[475/418]" className="mx-auto max-w-[560px] rounded-xl" />}
                   after={<ImageSlot {...IMAGES.layoutAfter} aspect="aspect-[2031/1990]" className="mx-auto max-w-[560px] rounded-xl" />}
                   beforeCaption="Fixed heights and minimum heights in the right slots — long content overflowed and broke the layout."
