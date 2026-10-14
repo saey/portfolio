@@ -35,10 +35,10 @@ export function CaseStudyLayout({
               href="/"
               className="rounded text-sm text-indigo-200 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              ← Work
+              ← Case Studies
             </Link>
             <p className="mt-20 text-xs font-medium uppercase tracking-[0.25em] text-indigo-200">{eyebrow}</p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-7xl">
+            <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">
               {title}
             </h1>
             <p className="mt-8 max-w-2xl text-xl font-normal leading-relaxed text-indigo-100">{subtitle}</p>
@@ -71,7 +71,7 @@ export function CaseStudyLayout({
 
         <footer className="flex items-center justify-between border-t border-zinc-200 py-12 text-sm dark:border-zinc-800">
           <Link href="/" className="text-zinc-600 transition-colors hover:text-indigo-700 dark:text-zinc-400 dark:hover:text-indigo-400">
-            ← All work
+            ← All case studies
           </Link>
           <a
             href={`#${sections[0]?.id ?? ""}`}

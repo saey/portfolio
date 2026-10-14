@@ -137,6 +137,7 @@ const IMAGES = {
 
 /** Flip to true once the UX best practices content is ready. */
 const SHOW_UX_BEST_PRACTICES = false;
+const SHOW_GRIDS = false;
 
 const SECTIONS = [
   { id: "summary", label: "Executive Summary" },
@@ -151,7 +152,7 @@ const META = [
   { label: "Role", value: "Lead Product Designer & Director" },
   { label: "Team", value: "5 IC designers, 4 product owners" },
   { label: "Platform", value: "Figma · AEM" },
-  { label: "Tooling", value: "Claude · MCP" },
+  { label: "Tooling", value: "Claude · Figma MCP" },
 ];
 
 type Metric = { before?: string; after: string; label: string; detail: string };
@@ -175,13 +176,13 @@ export default function DesignSystemCaseStudy() {
               href="/"
               className="rounded text-sm text-indigo-200 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              ← Work
+              ← Case Studies
             </Link>
 
             <p className="mt-20 text-xs font-medium uppercase tracking-[0.25em] text-indigo-200">
               Case Study — Design Systems
             </p>
-            <h1 className="mt-6 max-w-4xl text-5xl font-semibold leading-[1.02] tracking-[-0.035em] sm:text-7xl">
+            <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">
               Design System Refactoring &amp; Remediation
             </h1>
             <p className="mt-8 max-w-2xl text-xl font-normal leading-relaxed text-indigo-100">
@@ -230,9 +231,9 @@ export default function DesignSystemCaseStudy() {
                 right={
                   <Block label="Outcome">
                     <Em>I led a full refactor toward role-based semantic tokens,</Em>{" "}
-                    remediated accessibility at the component level, and aligned
-                    the Figma architecture with AEM authoring and engineering —
-                    guiding a team of five designers alongside four product owners.
+                    fixed accessibility at the component level, and aligned the
+                    library with AEM and engineering — using Claude for a visual
+                    audit and Figma MCP for hand-off to code.
                   </Block>
                 }
               />
@@ -283,13 +284,14 @@ export default function DesignSystemCaseStudy() {
                 ]}
               />
 
-              <Subhead>AI-assisted design audit</Subhead>
+              <Subhead>AI-driven visual audit</Subhead>
               <Body className="max-w-3xl">
-                Before changing anything, <Em>I used Claude via MCP to audit the
-                Figma library end to end</Em> — surfacing unused tokens, duplicate
-                values, overlong paths and structural vulnerabilities in the
-                token hierarchy. The findings became a prioritized remediation
-                plan the team could review and agree on.
+                Before changing anything, <Em>I fed screenshots of the broken
+                library directly to Claude</Em> and had it audit them visually —
+                flagging invalid styles, duplicate values, overlong paths and
+                structural gaps in the token hierarchy. What would have taken
+                days of manual inspection became a prioritized remediation plan
+                the team could review and agree on.
               </Body>
               <div className={`mt-10 ${STAGE}`}>
                 <AuditTerminal />
@@ -392,35 +394,36 @@ export default function DesignSystemCaseStudy() {
                 breakpoints. <Em>Components switch language without separate
                 variants.</Em>
               </Body>
-              <TwoCol
-                left={
-                  <>
-                    <pre className="mt-8 rounded-xl bg-zinc-50 p-5 font-mono text-xs leading-7 text-zinc-600 dark:text-zinc-400">
-                      {`Theme          59  color switching
+              <div className="mt-8 grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+                <div>
+                  <pre className="rounded-xl bg-zinc-50 p-5 font-mono text-xs leading-7 text-zinc-600 dark:text-zinc-400">
+                    {`Theme          59  color switching
 Responsive EN  88  language × responsive
 └ Responsive JA
 Scale          35  absolute values
 Brand         195`}
-                    </pre>
-                  </>
-                }
-                right={
-                  <ul className="mt-8 space-y-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+                  </pre>
+                  <ul className="mt-6 space-y-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                     <Dot>Responsive scale for widths and component paddings</Dot>
                     <Dot>Retired Display, Lead and Quote sizes; added Label and Absolute</Dot>
                     <Dot>Each style documents where it is used, e.g. Stat lg in Stat Block and Content Grid</Dot>
                   </ul>
-                }
-              />
-              <figure className="mt-12">
-                <ImageSlot {...IMAGES.typography} aspect="aspect-[2000/1387]" className="rounded-xl" />
-                <figcaption className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
-                  Responsive type scale — Stat and Heading styles across lg (1024+), md (768+) and sm (320+).
-                </figcaption>
-              </figure>
+                </div>
+                <figure>
+                  <ImageSlot {...IMAGES.typography} aspect="aspect-[2000/1387]" sizes="(min-width: 1024px) 640px, 100vw" className="rounded-xl" />
+                  <figcaption className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
+                    Responsive type scale — Stat and Heading styles across lg (1024+), md (768+) and sm (320+).
+                  </figcaption>
+                </figure>
+              </div>
 
-              <Subhead>Grids &amp; breakpoints</Subhead>
-              <BreakpointTable />
+              {/* Hidden for now. */}
+              {SHOW_GRIDS && (
+                <>
+                  <Subhead>Grids &amp; breakpoints</Subhead>
+                  <BreakpointTable />
+                </>
+              )}
             </Section>
 
             {/* 04 */}
@@ -587,6 +590,16 @@ Brand         195`}
                   ]}
                 />
               </div>
+
+              <Subhead>Figma MCP: one structure for design and code</Subhead>
+              <Body className="max-w-3xl">
+                I proposed Figma MCP to the development team as a shared bridge
+                between design and code. Instead of treating the design system as
+                data closed off inside Figma, <Em>I worked with engineers to make
+                the token and component structure MCP-friendly</Em> — semantic
+                tokens that map 1:1 to CSS classes, and auto layout aligned with
+                the CSS grid — so what designers build is what MCP hands to code.
+              </Body>
             </Section>
 
             {/* 06 */}
@@ -636,28 +649,6 @@ Brand         195`}
                   stacked
                   pages={[
                     {
-                      id: "master",
-                      label: "Master components",
-                      title: "Every background, header and column layout",
-                      image: <DocImage image={IMAGES.handoffMaster} aspect="aspect-[12/11]" />,
-                      points: [
-                        "White, gray and navy backgrounds side by side",
-                        "Vertical and horizontal section headers",
-                        "2, 3 and 4 column layouts on desktop",
-                      ],
-                    },
-                    {
-                      id: "responsive",
-                      label: "Responsive & corner cases",
-                      title: "Tablet, mobile and edge cases",
-                      image: <DocImage image={IMAGES.handoffResponsive} aspect="aspect-[5/4]" />,
-                      points: [
-                        "Column changes for tablet and mobile",
-                        "Corner cases such as no section header and long stat values",
-                        "How content wraps instead of truncating",
-                      ],
-                    },
-                    {
                       id: "specs",
                       label: "Specs & authoring",
                       title: "Elements mapped to AEM authoring",
@@ -678,6 +669,28 @@ Brand         195`}
                         "sm and md card sizes compared side by side",
                       ],
                     },
+                    {
+                      id: "responsive",
+                      label: "Responsive & corner cases",
+                      title: "Tablet, mobile and edge cases",
+                      image: <DocImage image={IMAGES.handoffResponsive} aspect="aspect-[5/4]" />,
+                      points: [
+                        "Column changes for tablet and mobile",
+                        "Corner cases such as no section header and long stat values",
+                        "How content wraps instead of truncating",
+                      ],
+                    },
+                    {
+                      id: "master",
+                      label: "Master components",
+                      title: "Every background, header and column layout",
+                      image: <DocImage image={IMAGES.handoffMaster} aspect="aspect-[12/11]" />,
+                      points: [
+                        "White, gray and navy backgrounds side by side",
+                        "Vertical and horizontal section headers",
+                        "2, 3 and 4 column layouts on desktop",
+                      ],
+                    },
                   ]}
                 />
               </div>
@@ -687,7 +700,7 @@ Brand         195`}
 
         <footer className="flex items-center justify-between border-t border-zinc-200 py-12 text-sm dark:border-zinc-800">
           <Link href="/" className="text-zinc-600 transition-colors hover:text-indigo-700 dark:text-zinc-400 dark:hover:text-indigo-400">
-            ← All work
+            ← All case studies
           </Link>
           <a href="#summary" className="text-zinc-500 transition-colors hover:text-indigo-700 dark:hover:text-indigo-400">
             Back to top ↑
