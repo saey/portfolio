@@ -233,7 +233,7 @@ export default function DesignSystemCaseStudy() {
                   <Block label="Outcome">
                     <Em>I led a full refactor toward role-based semantic tokens,</Em>{" "}
                     fixed accessibility at the component level, and aligned the
-                    library with AEM and engineering — using Claude for a visual
+                    library with AEM and engineering — using Claude for a token
                     audit and Figma MCP for hand-off to code.
                   </Block>
                 }
@@ -285,11 +285,10 @@ export default function DesignSystemCaseStudy() {
                 ]}
               />
 
-              <Subhead>AI-driven visual audit</Subhead>
+              <Subhead>AI-assisted token audit</Subhead>
               <Body className="max-w-3xl">
-                Before changing anything, <Em>I fed screenshots of the broken
-                library directly to Claude</Em> and had it audit them visually —
-                flagging invalid styles, duplicate values, overlong paths and
+                Before changing anything, <Em>I audited the existing
+                variables and tokens with Claude</Em> — flagging invalid styles, duplicate values, overlong paths and
                 structural gaps in the token hierarchy. What would have taken
                 days of manual inspection became a prioritized remediation plan
                 the team could review and agree on.

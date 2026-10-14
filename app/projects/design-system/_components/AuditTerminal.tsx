@@ -16,7 +16,7 @@ type Line =
   | { kind: "warn" | "fail" | "ok" | "info"; text: string; detail?: string };
 
 const LOG: Line[] = [
-  { kind: "cmd", text: "audit ./screenshots/figma-library/*.png --scope variables,components" },
+  { kind: "cmd", text: "audit figma-library --scope variables,tokens" },
   { kind: "head", text: "Variables" },
   { kind: "warn", text: "Theme collection holds non-color values", detail: "font family · weight · size · spacing · size · border" },
   { kind: "warn", text: "Colors bound to components, not roles", detail: "336 theme colors" },
@@ -112,7 +112,7 @@ export function AuditTerminal() {
         )}
       </div>
       <p className="px-5 pb-4 text-[11px] text-zinc-500">
-        Summary of the AI-driven visual audit — library screenshots reviewed by Claude. Totals are published tokens, excluding .Primitives.
+        Summary of the AI-assisted token audit with Claude. Totals are published tokens, excluding .Primitives.
       </p>
     </div>
   );
