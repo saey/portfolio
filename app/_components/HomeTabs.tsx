@@ -98,10 +98,10 @@ export function HomeTabs({
                     t.bottom ? "text-xs" : "text-[15px]"
                   } ${i === firstBottom ? "lg:mt-auto" : ""} ${
                     selected
-                      ? `font-semibold ${INK.accent}`
+                      ? `${t.bottom ? "font-semibold" : "font-medium"} ${INK.accent}`
                       : t.bottom
                         ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
-                        : "font-medium text-neutral-500 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
+                        : "font-normal text-neutral-500 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
                   }`}
                 >
                   {t.label}
