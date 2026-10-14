@@ -223,7 +223,7 @@ function buttonStyle(kind: BtnKind, state: BtnState, version: "before" | "after"
       base,
       v
         ? { outline: `1px dashed ${C.before.ring}`, outlineOffset: 3, transform: "translateX(1px)" }
-        : { outline: `2px solid ${C.after.ring}`, outlineOffset: 2 },
+        : { outline: `2px dashed ${C.after.ring}`, outlineOffset: 2 },
     );
   }
   return base;
@@ -284,7 +284,7 @@ function ButtonStage({ mode }: { mode: Mode }) {
       <div className="space-y-8">
         <style>{`
           .ab-btn{outline:none}
-          .ab-btn:focus-visible{outline:2px solid ${C.after.ring};outline-offset:2px}
+          .ab-btn:focus-visible{outline:2px dashed ${C.after.ring};outline-offset:2px}
           .ab-primary{background:${C.after.primary};color:#fff}
           .ab-primary:hover{background:${C.after.hover}}
           .ab-primary:active{background:${C.after.active}}

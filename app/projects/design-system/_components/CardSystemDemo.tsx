@@ -10,15 +10,15 @@ type ListVariant = "horizontal" | "vertical" | "wide" | "center";
 
 const VIEWS = [
   { id: "before", label: "Before" },
+  { id: "compare", label: "Compare" },
   { id: "block", label: "Card Block" },
   { id: "list", label: "List Item" },
-  { id: "compare", label: "Compare" },
 ] as const;
 
 const BLOCK_VARIANTS = [
+  { id: "compact", label: "Compact" },
   { id: "feature", label: "Feature" },
   { id: "visual", label: "Visual" },
-  { id: "compact", label: "Compact" },
 ] as const;
 
 const LIST_VARIANTS = [

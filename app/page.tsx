@@ -27,15 +27,15 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     index: "01",
-    title: "Design System Refactoring & Remediation",
+    title: "Quork Board: Billing & Invoice",
     summary:
-      "Rebuilding an agency-made library into role-based semantic tokens — accessible by default and built around AEM.",
-    tags: ["Enterprise Architecture", "Accessibility", "AEM"],
+      "Streamlining multi-entity invoicing, automated reconciliation, and approval workflows for enterprise financial operations.",
+    tags: ["Enterprise SaaS", "Financial Workflows", "Invoice Automation"],
     image: {
-      name: "Apple+Cinema+display+in+home+office",
-      alt: "Asset allocation screen on a desktop display",
+      name: "Quork+Board+-+Timesheet+Invoice+Billing_G",
+      alt: "Quork Board billing, invoice and timesheet screens",
     },
-    href: "/projects/design-system",
+    href: "/projects/quorkboard-billing",
   },
   {
     index: "02",
@@ -48,6 +48,18 @@ const PROJECTS: Project[] = [
   },
   {
     index: "03",
+    title: "Design System Refactoring & Remediation",
+    summary:
+      "Rebuilding an agency-made library into role-based semantic tokens — accessible by default and built around AEM.",
+    tags: ["Enterprise Architecture", "Accessibility", "AEM"],
+    image: {
+      name: "Apple+Cinema+display+in+home+office",
+      alt: "Asset allocation screen on a desktop display",
+    },
+    href: "/projects/design-system",
+  },
+  {
+    index: "04",
     title: "Grid UI Unification",
     summary:
       "Unifying grid components and layout rules into one governed system.",
@@ -56,18 +68,6 @@ const PROJECTS: Project[] = [
       name: "GridUnification",
       alt: "Unified grid filter, date picker and column components",
     },
-  },
-  {
-    index: "04",
-    title: "Quork Board: Billing & Invoice",
-    summary:
-      "Streamlining multi-entity invoicing, automated reconciliation, and approval workflows for enterprise financial operations.",
-    tags: ["Enterprise SaaS", "Financial Workflows", "Invoice Automation"],
-    image: {
-      name: "Quork+Board+-+Timesheet+Invoice+Billing_G",
-      alt: "Quork Board billing, invoice and timesheet screens",
-    },
-    href: "/projects/quorkboard-billing",
   },
 ];
 
