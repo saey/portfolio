@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Toggle } from "./Toggle";
+import { Toggle } from "../../_components/Toggle";
 
 type Tab = "log" | "collections";
 

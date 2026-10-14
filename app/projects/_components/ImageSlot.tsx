@@ -1,8 +1,8 @@
-import { existsSync, openSync, readSync, closeSync } from "node:fs";
+import { closeSync, existsSync, openSync, readdirSync, readSync } from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 
-/** Images live in /public/projects/design-system/<name>.<ext> */
+/** Default image folder: /public/projects/design-system/<name>.<ext>. Other pages pass `dir`. */
 const PUBLIC_DIR = "projects/design-system";
 const EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif", "gif"];
 
@@ -20,28 +20,43 @@ type ImageSlotProps = ImageAsset & {
   position?: "center" | "top";
   sizes?: string;
   className?: string;
+  /** Folder under /public, e.g. "projects/mori-puzzle". */
+  dir?: string;
 };
 
-function resolveFile(name: string): { src: string; file: string } | null {
+function resolveFile(name: string, dir = PUBLIC_DIR): { src: string; file: string } | null {
   for (const ext of EXTENSIONS) {
-    const file = path.join(process.cwd(), "public", PUBLIC_DIR, `${name}.${ext}`);
-    if (existsSync(file)) return { src: `/${PUBLIC_DIR}/${name}.${ext}`, file };
+    const file = path.join(process.cwd(), "public", dir, `${name}.${ext}`);
+    if (existsSync(file)) return { src: `/${dir}/${name}.${ext}`, file };
   }
   return null;
 }
 
-function resolveSrc(name: string): string | null {
-  return resolveFile(name)?.src ?? null;
-}
-
 /** Reads width/height from a PNG header; null for other formats. */
-function pngSize(file: string): { width: number; height: number } | null {
+function readPngSize(file: string): { width: number; height: number } | null {
   const buf = Buffer.alloc(24);
   const fd = openSync(file, "r");
   readSync(fd, buf, 0, 24, 0);
   closeSync(fd);
   if (buf.toString("ascii", 1, 4) !== "PNG") return null;
   return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+}
+
+/**
+ * PNG sizes, read once at module scope. Reading them during render trips the
+ * Cache Components prerender check in dev, even though the files are static.
+ */
+const PNG_SIZES = new Map(
+  readdirSync(path.join(process.cwd(), "public", PUBLIC_DIR), { recursive: true, encoding: "utf8" })
+    .filter((f) => f.endsWith(".png"))
+    .map((f) => {
+      const file = path.join(process.cwd(), "public", PUBLIC_DIR, f);
+      return [file, readPngSize(file)] as const;
+    }),
+);
+
+function pngSize(file: string) {
+  return PNG_SIZES.get(file) ?? null;
 }
 
 /** Tall document shown at full width inside a scrollable frame (PNG only). */
@@ -76,8 +91,9 @@ export function ImageSlot({
   position = "center",
   sizes = "(min-width: 1024px) 1024px, 100vw",
   className = "",
+  dir = PUBLIC_DIR,
 }: ImageSlotProps) {
-  const src = resolveSrc(name);
+  const src = resolveFile(name, dir)?.src ?? null;
 
   return (
     <div
@@ -101,7 +117,7 @@ export function ImageSlot({
         >
           <span className="text-sm text-zinc-500 dark:text-zinc-400">{alt}</span>
           <span className="font-mono text-[11px] text-zinc-400 dark:text-zinc-600">
-            {PUBLIC_DIR}/{name}.png
+            public/{dir}/{name}.png
           </span>
         </div>
       )}

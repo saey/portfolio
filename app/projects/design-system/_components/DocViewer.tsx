@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Toggle } from "./Toggle";
-import { STAGE } from "./stage";
+import { Toggle } from "../../_components/Toggle";
+import { STAGE } from "../../_components/stage";
 
 export type DocPage = {
   id: string;

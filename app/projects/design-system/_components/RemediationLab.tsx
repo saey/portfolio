@@ -2,8 +2,8 @@
 
 import { useState, type CSSProperties, type ReactNode } from "react";
 import { contrast } from "./contrast";
-import { Toggle } from "./Toggle";
-import { STAGE, SURFACE } from "./stage";
+import { Toggle } from "../../_components/Toggle";
+import { STAGE, SURFACE } from "../../_components/stage";
 
 type Element = "button" | "color" | "tag";
 type Mode = "before" | "after" | "interactive";

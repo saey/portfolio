@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type MouseEvent, type ReactNode } from "react";
-import { Toggle } from "./Toggle";
-import { STAGE, SURFACE } from "./stage";
+import { Toggle } from "../../_components/Toggle";
+import { STAGE, SURFACE } from "../../_components/stage";
 
 type View = "before" | "block" | "list" | "compare";
 type BlockVariant = "feature" | "visual" | "compact";
@@ -47,6 +47,7 @@ export function CardSystemDemo() {
           options={[{ id: "on", label: "Show link targets" }, { id: "off", label: "Hide" }] as const}
           value={targets}
           onChange={setTargets}
+          level={1}
         />
       </div>
 
@@ -152,14 +153,15 @@ function Eyebrow({ dark }: { dark?: boolean }) {
 
 const TAG_TEXT = ["Jan 20, 2026", "5:45 Mins", "5:45 Mins", "5:45 Mins"];
 
-function Tags({ dark, count = 2, className = "" }: { dark?: boolean; count?: number; className?: string }) {
+/** `onGray` gives tags a white fill so they stay visible on a gray card. */
+function Tags({ dark, onGray, count = 2, className = "" }: { dark?: boolean; onGray?: boolean; count?: number; className?: string }) {
   return (
     <div className={`flex flex-wrap gap-1 ${className}`}>
       {TAG_TEXT.slice(0, count).map((t, i) => (
         <span
           key={i}
           className={`inline-flex items-center gap-1 rounded-sm px-1.5 py-0.5 text-[10px] ${
-            dark ? "bg-[#1C3F8A] text-white" : "bg-zinc-100 text-zinc-700"
+            dark ? "bg-[#1C3F8A] text-white" : onGray ? "bg-white text-zinc-700" : "bg-zinc-100 text-zinc-700"
           }`}
         >
           <Video />
@@ -218,11 +220,11 @@ function CardBlock({ variant, show }: { variant: BlockVariant; show: boolean }) 
   }
 
   return (
-    <a href="#" onClick={stay} className={`${base} flex gap-4 bg-white p-4 text-zinc-900 hover:bg-zinc-100`}>
+    <a href="#" onClick={stay} className={`${base} flex gap-4 bg-zinc-100 p-4 text-zinc-900 hover:bg-zinc-200`}>
       <Img ratio="aspect-square" className="w-24" />
       <div className="min-w-0 space-y-1.5">
         <Eyebrow />
-        <Tags count={3} />
+        <Tags onGray count={3} />
         <p className="text-lg font-semibold leading-snug">Title Lorem Ipsum Dolor Sit Amet</p>
         <p className="text-[11px] text-zinc-500">Lorem Ipsum Dolor Sit Amet</p>
         <Arrow />
@@ -251,6 +253,38 @@ function Links({ show }: { show: boolean }) {
   );
 }
 
+const LINK =
+  "rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700";
+
+/** Clickable eyebrow, in the link color. */
+function LinkEyebrow({ show, className = "" }: { show: boolean; className?: string }) {
+  return (
+    <a
+      href="#"
+      onClick={stay}
+      className={`inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.15em] text-[#1F5FBF] hover:underline ${LINK} ${target(show)} ${className}`}
+    >
+      <Plus />
+      Eyebrow
+      <Plus />
+    </a>
+  );
+}
+
+/** Clickable image. */
+function LinkImg({ show, ratio, className = "w-full" }: { show: boolean; ratio: string; className?: string }) {
+  return (
+    <a
+      href="#"
+      onClick={stay}
+      aria-label="Title Lorem Ipsum Dolor Sit Amet"
+      className={`block shrink-0 self-start ${LINK} ${target(show)} ${className}`}
+    >
+      <Img ratio={ratio} />
+    </a>
+  );
+}
+
 function Title({ size = "lg", children }: { size?: "sm" | "lg"; children: ReactNode }) {
   return (
     <p className={`font-medium leading-snug text-zinc-900 dark:text-zinc-100 ${size === "lg" ? "text-lg" : "text-sm"}`}>
@@ -266,9 +300,9 @@ function ListItem({ variant, show }: { variant: ListVariant; show: boolean }) {
   if (variant === "horizontal")
     return (
       <div className="flex gap-4">
-        <Img ratio="aspect-square" className="w-24" />
+        <LinkImg show={show} ratio="aspect-square" className="w-24" />
         <div className="min-w-0 space-y-1.5">
-          <Eyebrow />
+          <div><LinkEyebrow show={show} /></div>
           <Tags count={4} />
           <Title>Title Lorem Ipsum Dolor Sit Amet</Title>
           <Desc />
@@ -281,9 +315,9 @@ function ListItem({ variant, show }: { variant: ListVariant; show: boolean }) {
     return (
       <div className="max-w-[260px] space-y-3">
         <div className="flex gap-3">
-          <Img ratio="aspect-square" className="w-20" />
+          <LinkImg show={show} ratio="aspect-square" className="w-20" />
           <div className="space-y-1.5">
-            <Eyebrow />
+            <div><LinkEyebrow show={show} /></div>
             <Tags count={3} />
           </div>
         </div>
@@ -296,14 +330,14 @@ function ListItem({ variant, show }: { variant: ListVariant; show: boolean }) {
   if (variant === "wide")
     return (
       <div className="flex items-start gap-3">
-        <Img ratio="aspect-square" className="w-14" />
+        <LinkImg show={show} ratio="aspect-square" className="w-14" />
         <div className="min-w-0 flex-1 space-y-1">
           <Title size="sm">Title Lorem Ipsum Dolor Sit Amet</Title>
           <Desc />
           <Links show={show} />
         </div>
         <div className="flex max-w-[40%] flex-col items-end gap-1.5">
-          <Eyebrow />
+          <div><LinkEyebrow show={show} /></div>
           <Tags count={3} className="justify-end" />
         </div>
       </div>
@@ -311,9 +345,9 @@ function ListItem({ variant, show }: { variant: ListVariant; show: boolean }) {
 
   return (
     <div className="space-y-2">
-      <Img ratio="aspect-[16/9]" />
+      <LinkImg show={show} ratio="aspect-[16/9]" />
       <div className="space-y-1.5 pt-1">
-        <Eyebrow />
+        <div><LinkEyebrow show={show} /></div>
         <Tags count={4} />
         <Title>Title Lorem Ipsum Dolor Sit Amet</Title>
         <Desc />

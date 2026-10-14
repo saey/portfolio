@@ -5,10 +5,104 @@ import { AuditTerminal } from "./_components/AuditTerminal";
 import { BeforeAfter } from "./_components/BeforeAfter";
 import { CardSystemDemo } from "./_components/CardSystemDemo";
 import { DocViewer } from "./_components/DocViewer";
-import { ImageSlot, ScrollImage, type ImageAsset } from "./_components/ImageSlot";
+import { ImageSlot, ScrollImage, type ImageAsset } from "../_components/ImageSlot";
 import { RemediationLab } from "./_components/RemediationLab";
-import { SectionNav } from "./_components/SectionNav";
-import { STAGE } from "./_components/stage";
+import { SectionNav } from "../_components/SectionNav";
+import { STAGE } from "../_components/stage";
+
+const iconProps = {
+  viewBox: "0 0 24 24",
+  className: "h-12 w-12",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+} as const;
+
+/** Icons for the color system principles. */
+const ICONS = {
+  // Accessibility & Component Remediation
+  cta: (
+    <svg {...iconProps}>
+      <rect x="2.5" y="7" width="19" height="10" rx="5" fill="currentColor" fillOpacity={0.15} />
+      <path d="M8.5 12h7" strokeWidth={2} />
+    </svg>
+  ),
+  inputs: (
+    <svg {...iconProps}>
+      <rect x="2.5" y="6.5" width="19" height="11" rx="2" />
+      <path d="M7 9.5v5" />
+    </svg>
+  ),
+  focus: (
+    <svg {...iconProps}>
+      <rect x="6.5" y="8.5" width="11" height="7" rx="1.5" />
+      <rect x="3" y="5" width="18" height="14" rx="3.5" strokeDasharray="2.5 2.5" />
+    </svg>
+  ),
+  touch: (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.25" fill="currentColor" />
+    </svg>
+  ),
+  states: (
+    <svg {...iconProps}>
+      <path d="M5 4l6.5 16 2.4-6.6L20.5 11z" />
+      <path d="M17 17l3.5 3.5" />
+    </svg>
+  ),
+  // AEM & Engineering Compatibility
+  elastic: (
+    <svg {...iconProps}>
+      <path d="M3 5v14M21 5v14M7 12h10M9.5 9.5L7 12l2.5 2.5M14.5 9.5L17 12l-2.5 2.5" />
+    </svg>
+  ),
+  authoring: (
+    <svg {...iconProps}>
+      <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4z" />
+      <path d="M14.5 5.5l3 3" />
+    </svg>
+  ),
+  grid: (
+    <svg {...iconProps}>
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <path d="M9 3v18M15 3v18" />
+    </svg>
+  ),
+  // Half-filled circle: light and dark.
+  modes: (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" />
+    </svg>
+  ),
+  // One token feeding several components.
+  reuse: (
+    <svg {...iconProps}>
+      <circle cx="6" cy="12" r="2.5" />
+      <circle cx="18" cy="5.5" r="2.5" />
+      <circle cx="18" cy="18.5" r="2.5" />
+      <path d="M8.3 10.8l7.4-4M8.3 13.2l7.4 4" />
+    </svg>
+  ),
+  // Foreground layered on a background.
+  pairings: (
+    <svg {...iconProps}>
+      <rect x="3.5" y="3.5" width="12" height="12" rx="2" />
+      <rect x="8.5" y="8.5" width="12" height="12" rx="2" fill="currentColor" fillOpacity={0.15} />
+    </svg>
+  ),
+  // Short, searchable names.
+  naming: (
+    <svg {...iconProps}>
+      <circle cx="10.5" cy="10.5" r="6" />
+      <path d="M15 15l5 5M8 10.5h5" />
+    </svg>
+  ),
+};
 
 export const metadata: Metadata = {
   title: "Design System Refactoring & Remediation — Case Study",
@@ -25,14 +119,16 @@ const IMAGES = {
   patternsBefore: { name: "patterns-before", alt: "CTAs and tabs with similar styling, bottom-aligned text" },
   patternsAfter: { name: "patterns-after", alt: "Distinct CTAs and tabs, combobox, top-aligned text" },
   layoutBefore: { name: "web/flex-before", alt: "HP Hero before: fixed-height slots with text overflowing its container" },
-  layoutAfter: { name: "web/flex-after", alt: "HP Hero after: elastic slots on desktop, tablet and mobile" },
+  layoutAfter: { name: "Audit Examples/Content Flexibility After2", alt: "HP Hero after: elastic slots that grow with long headlines and stacked content" },
+  gridBefore: { name: "Audit Examples/Content Grid Before 2", alt: "Legacy grid components before the merge: Compact Card Package, Styled List Breaker, Card Grid and Value Prop Package" },
+  gridAfter: { name: "Audit Examples/Content Grid After", alt: "Content Grid after the merge: vertical and horizontal headers with card grid items, and the mobile layout" },
   aiCollections: { name: "web/ai-collections", alt: "Claude audit: collection sizes against recommended ranges, and a theme reduction roadmap" },
   aiLayers: { name: "web/ai-layers", alt: "Claude audit: primitives, theme variables and swatches — three broken layers" },
   aiColor: { name: "web/ai-color", alt: "Claude audit: color system issues and recommendations" },
   aiFont: { name: "web/ai-font", alt: "Claude audit: typography issues and the label token recommendation" },
-  guideAuthoring: { name: "web/guide-authoring", alt: "Accessibility Authoring Guideline" },
-  guideComponents: { name: "web/guide-components", alt: "Accessibility Components Design Guideline" },
-  guideTemplates: { name: "web/guide-templates", alt: "Component Templates and Design Guidelines" },
+  guideAuthoring: { name: "Guideline/Accessibility Authoring Guideline", alt: "Accessibility Authoring Guideline" },
+  guideComponents: { name: "Guideline/Accessiblity Components Design Guideline", alt: "Accessibility Components Design Guideline" },
+  guideTemplates: { name: "Guideline/Components Templates and Design Guidelines", alt: "Component Templates and Design Guidelines" },
   handoffMaster: { name: "web/handoff-master", alt: "Content Grid master components on white, gray and navy backgrounds" },
   handoffResponsive: { name: "web/handoff-responsive", alt: "Content Grid on tablet and mobile, with corner case examples" },
   handoffSpecs: { name: "web/handoff-specs", alt: "Content Grid specs mapped to AEM authoring fields" },
@@ -152,16 +248,23 @@ export default function DesignSystemCaseStudy() {
                 </Body>
               </div>
               <List
+                cols={3}
                 items={[
                   ["Redundant components", "Removed duplicate components and variations, and consolidated variations that were never presented."],
-                  ["“Same UI, different functionality”", "Resolved components that looked identical but behaved differently."],
-                  ["“Different UI, same functionality”", "Resolved components that did the same job with different designs."],
+                  ["UI matched to function", "Resolved components that looked identical but behaved differently, and ones that did the same job with different designs."],
                   ["Library structure", "Organized into Core, Components and Local Elements for easier maintenance."],
                 ]}
               />
 
               <Subhead>Example: Content Grid</Subhead>
-              <ContentGridMerge />
+              <BeforeAfter
+                title="Content Grid"
+                minimal
+                before={<ImageSlot {...IMAGES.gridBefore} aspect="aspect-[1928/930]" fit="contain" className="rounded-xl" />}
+                after={<ImageSlot {...IMAGES.gridAfter} aspect="aspect-[1938/1400]" className="rounded-xl" />}
+                beforeNotes={<LegacyGrids />}
+                afterNotes={<ContentGridSummary />}
+              />
             </Section>
 
             {/* 02 */}
@@ -172,6 +275,7 @@ export default function DesignSystemCaseStudy() {
                 <Code>colors/text/button/primary/default/base/disabled</Code>.
               </Lead>
               <List
+                cols={3}
                 items={[
                   ["Massive technical debt", "The same value existed under dozens of names. A single brand change touched every component, and no one could say which value was canonical."],
                   ["Broken theme scalability", "Colors were bound to elements, not roles, and the Theme collection also held fonts, spacing, sizes and borders — so four theme modes existed for two real appearances."],
@@ -260,6 +364,7 @@ export default function DesignSystemCaseStudy() {
               </div>
 
               <List
+                cols={3}
                 items={[
                   ["Shorter paths", "colors/text/button/primary/default/base/disabled became foreground/disabled."],
                   ["Semantic, not per component", "Tokens describe a role — background, foreground, action — and every component shares them."],
@@ -269,11 +374,12 @@ export default function DesignSystemCaseStudy() {
 
               <Subhead>Color system principles</Subhead>
               <List
+                cols={4}
                 items={[
-                  ["Two modes", "Theme modes limited to Light and Dark, with primary, secondary and tertiary backgrounds in each."],
-                  ["Reusable, not specific", "A variable is created only when multiple components need it."],
-                  ["Few pairings", "Foreground and background combinations kept low — avoiding authorable colors on authorable backgrounds."],
-                  ["No over-tokenization", "Names stay short, self-explanatory and searchable, grouped into bg, foreground, border, gradient, shadow and utility."],
+                  ["Two modes", "Theme modes limited to Light and Dark, with primary, secondary and tertiary backgrounds in each.", ICONS.modes],
+                  ["Reusable, not specific", "A variable is created only when multiple components need it.", ICONS.reuse],
+                  ["Few pairings", "Foreground and background combinations kept low — avoiding authorable colors on authorable backgrounds.", ICONS.pairings],
+                  ["No over-tokenization", "Names stay short, self-explanatory and searchable, grouped into bg, foreground, border, gradient, shadow and utility.", ICONS.naming],
                 ]}
               />
 
@@ -325,12 +431,13 @@ Brand         195`}
                 page inherits <Em>WCAG AA across core interactive components</Em>.
               </Lead>
               <List
+                cols={5}
                 items={[
-                  ["CTA contrast", "Fills and text CTAs raised to AA, including on gray backgrounds."],
-                  ["Inputs", "Borders and text brought into AA contrast range."],
-                  ["Focus rings", "AA-safe color, aligned to component bounds, on every interactive element."],
-                  ["Touch targets", "Expanded from 16×16 to 28×28 and above."],
-                  ["Interactive states", "Missing hover, focus, active and disabled states supplied."],
+                  ["CTA contrast", "Fills and text CTAs raised to AA, including on gray backgrounds.", ICONS.cta],
+                  ["Inputs", "Borders and text brought into AA contrast range.", ICONS.inputs],
+                  ["Focus rings", "AA-safe color, aligned to component bounds, on every interactive element.", ICONS.focus],
+                  ["Touch targets", "Expanded from 16×16 to 28×28 and above.", ICONS.touch],
+                  ["Interactive states", "Missing hover, focus, active and disabled states supplied.", ICONS.states],
                 ]}
               />
 
@@ -366,7 +473,7 @@ Brand         195`}
                   ].map(([k, v]) => (
                     <div key={k}>
                       <dt className="font-mono text-xs text-indigo-700 dark:text-indigo-400">{k}</dt>
-                      <dd className="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{v}</dd>
+                      <dd className="mt-1 text-[13px] leading-[1.6] text-zinc-600 dark:text-zinc-400">{v}</dd>
                     </div>
                   ))}
                 </dl>
@@ -410,10 +517,11 @@ Brand         195`}
                 <Em>The Figma components had to flex the same way the code does.</Em>
               </Lead>
               <List
+                cols={3}
                 items={[
-                  ["Elastic components", "Removed rigid line objects and fixed heights; text overflow and truncation are specified per component."],
-                  ["Authoring behavior", "Re-specified component behavior around the authoring experience."],
-                  ["Grid alignment", "Components adapt to the grid system and its sizing."],
+                  ["Elastic components", "Removed rigid line objects and fixed heights; text overflow and truncation are specified per component.", ICONS.elastic],
+                  ["Authoring behavior", "Re-specified component behavior around the authoring experience.", ICONS.authoring],
+                  ["Grid alignment", "Components adapt to the grid system and its sizing.", ICONS.grid],
                 ]}
               />
 
@@ -421,23 +529,10 @@ Brand         195`}
                 <BeforeAfter
                   title="Elastic component architecture — HP Hero"
                   before={<ImageSlot {...IMAGES.layoutBefore} aspect="aspect-[475/418]" className="mx-auto max-w-[560px] rounded-xl" />}
-                  after={<ImageSlot {...IMAGES.layoutAfter} aspect="aspect-[2400/1083]" className="rounded-xl" />}
+                  after={<ImageSlot {...IMAGES.layoutAfter} aspect="aspect-[2031/1990]" className="mx-auto max-w-[560px] rounded-xl" />}
                   beforeCaption="Fixed heights and minimum heights in the right slots — long content overflowed and broke the layout."
                   afterCaption="Heights flex with content and always stack to the top. Background media is full-bleed; on desktop the image fills the space beside the left slot, on tablet and mobile it locks to 16:9."
                 />
-              </div>
-
-              <div className="mt-20 grid gap-16 md:grid-cols-2 md:gap-12">
-                <StatFigure value="22 → 7" title="Image aspect ratios">
-                  Unconventional image sizes were consolidated into seven
-                  standard patterns, so AEM authors make fewer decisions and
-                  renditions stay predictable.
-                </StatFigure>
-                <StatFigure value="1:1" title="Tokens as CSS classes via MCP">
-                  MCP emits Figma tokens directly as CSS classes — a shared
-                  vocabulary and a shared mental model for design and
-                  engineering.
-                </StatFigure>
               </div>
 
               <Subhead>Guides for authors and designers</Subhead>
@@ -455,7 +550,7 @@ Brand         195`}
                       id: "templates",
                       label: "Templates",
                       title: "Component Templates and Design Guidelines",
-                      image: <DocImage image={IMAGES.guideTemplates} />,
+                      image: <DocImage image={IMAGES.guideTemplates} scroll />,
                       points: [
                         "Templates to detach before use, with auto grid layout aligned to the CSS grid implementation for MCP",
                         "Typography: 12px minimum, 16px+ for body copy, 14px+ for CTAs and navigation",
@@ -468,7 +563,7 @@ Brand         195`}
                       id: "components",
                       label: "Components",
                       title: "Accessibility Components Design Guideline",
-                      image: <DocImage image={IMAGES.guideComponents} />,
+                      image: <DocImage image={IMAGES.guideComponents} scroll />,
                       points: [
                         "WCAG 2.2 Level AA as the baseline for every component",
                         "Content flexibility: validate at the smallest breakpoint, 200% text resize and 400% zoom",
@@ -481,7 +576,7 @@ Brand         195`}
                       id: "authoring",
                       label: "Authoring",
                       title: "Accessibility Authoring Guideline",
-                      image: <DocImage image={IMAGES.guideAuthoring} />,
+                      image: <DocImage image={IMAGES.guideAuthoring} scroll />,
                       points: [
                         "Alt text only when an image carries meaning; decorative images stay empty",
                         "CTA labels start with a verb, 2–5 words, 25 characters or fewer",
@@ -705,28 +800,26 @@ function Block({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-function List({ items }: { items: [string, string][] }) {
+/** Term/description grid. An optional third item renders an icon above the term. */
+function List({ items, cols = 2 }: { items: [string, string, ReactNode?][]; cols?: 2 | 3 | 4 | 5 }) {
+  const grid = { 2: "gap-x-12 sm:grid-cols-2", 3: "gap-x-10 md:grid-cols-3", 4: "gap-x-10 sm:grid-cols-2 lg:grid-cols-4", 5: "gap-x-8 sm:grid-cols-2 lg:grid-cols-5" }[cols];
   return (
-    <dl className="mt-12 grid gap-x-12 gap-y-8 sm:grid-cols-2">
-      {items.map(([term, desc]) => (
+    <dl className={`mt-12 grid gap-y-8 ${grid}`}>
+      {items.map(([term, desc, icon]) => (
         <div key={term}>
+          {icon && (
+            <span
+              aria-hidden
+              className="mb-5 block text-indigo-700 dark:text-indigo-300"
+            >
+              {icon}
+            </span>
+          )}
           <dt className="font-semibold text-neutral-900 dark:text-white">{term}</dt>
-          <dd className="mt-1.5 leading-7 text-zinc-600 dark:text-zinc-400">{desc}</dd>
+          <dd className="mt-1.5 text-[13px] leading-[1.6] text-zinc-600 [overflow-wrap:anywhere] dark:text-zinc-400">{desc}</dd>
         </div>
       ))}
     </dl>
-  );
-}
-
-function StatFigure({ value, title, children }: { value: string; title: string; children: ReactNode }) {
-  return (
-    <figure>
-      <p className="text-6xl font-light tracking-[-0.05em] text-indigo-700 sm:text-7xl dark:text-indigo-400">{value}</p>
-      <figcaption className="mt-6">
-        <span className="block font-medium">{title}</span>
-        <span className="mt-2 block leading-7 text-zinc-600 dark:text-zinc-400">{children}</span>
-      </figcaption>
-    </figure>
   );
 }
 
@@ -806,10 +899,11 @@ const LEGACY_GRIDS = [
   ["Value Prop Package", "Single use"],
 ];
 
-function ContentGridMerge() {
+function LegacyGrids() {
   return (
-    <div className="grid items-center gap-8 md:grid-cols-[1fr_auto_1fr] md:gap-10">
-      <ul className="space-y-3">
+    <div>
+      <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">Four legacy components</p>
+      <ul className="mt-3 space-y-2 text-sm">
         {LEGACY_GRIDS.map(([name, note]) => (
           <li key={name} className="flex items-baseline justify-between gap-4">
             <span className="text-zinc-400 line-through decoration-zinc-400 dark:text-zinc-500">{name}</span>
@@ -817,22 +911,26 @@ function ContentGridMerge() {
           </li>
         ))}
       </ul>
-      <span aria-hidden className="hidden text-3xl font-light text-indigo-600 md:block">→</span>
-      <div className="rounded-xl bg-zinc-50 p-6 dark:bg-zinc-900">
-        <p className="text-2xl font-semibold tracking-tight">Content Grid</p>
-        <ul className="mt-4 space-y-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-          <Dot>Aligned to the basic page grid</Dot>
-          <Dot>Vertical or horizontal header, 2–4 columns</Dot>
-          <Dot>Grid items: Stat List, Stat List Text, Card Block, List Item</Dot>
-          <Dot>Appendix stat text added</Dot>
-        </ul>
-        <a
-          href="#handoff"
-          className="mt-5 inline-block rounded text-sm font-medium text-indigo-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 dark:text-indigo-400"
-        >
-          See the hand-off doc ↓
-        </a>
-      </div>
+    </div>
+  );
+}
+
+function ContentGridSummary() {
+  return (
+    <div>
+      <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">One Content Grid</p>
+      <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+        <Dot>Aligned to the basic page grid</Dot>
+        <Dot>Vertical or horizontal header, 2–4 columns</Dot>
+        <Dot>Grid items: Stat List, Stat List Text, Card Block, List Item</Dot>
+        <Dot>Appendix stat text added</Dot>
+      </ul>
+      <a
+        href="#handoff"
+        className="mt-4 inline-block rounded text-sm font-medium text-indigo-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-700 dark:text-indigo-400"
+      >
+        See the hand-off doc ↓
+      </a>
     </div>
   );
 }

@@ -40,7 +40,7 @@ export function Toggle<T extends string>({
               type="button"
               aria-pressed={active}
               onClick={() => onChange(o.id)}
-              className={`rounded-sm border-b-2 pb-1 pt-0.5 text-xs transition-colors ${focus} ${
+              className={`rounded-none border-b-2 pb-1 pt-0.5 text-xs transition-colors ${focus} ${
                 active
                   ? dark
                     ? "border-indigo-400 font-medium text-white"
