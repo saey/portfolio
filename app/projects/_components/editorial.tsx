@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { rounded } from "../../fonts";
 import { SectionNav } from "./SectionNav";
 
 /* Shared editorial building blocks for case-study pages (mirrors /projects/design-system). */
@@ -38,7 +39,7 @@ export function CaseStudyLayout({
               ← Case Studies
             </Link>
             <p className="mt-20 text-xs font-medium uppercase tracking-[0.25em] text-indigo-200">{eyebrow}</p>
-            <h1 className="mt-6 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">
+            <h1 className={`mt-6 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.02em] sm:text-6xl ${rounded.className}`}>
               {title}
             </h1>
             <p className="mt-8 max-w-2xl text-xl font-normal leading-relaxed text-indigo-100">{subtitle}</p>
@@ -52,7 +53,7 @@ export function CaseStudyLayout({
             </dl>
           </header>
           {metrics?.length ? (
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-10 pb-16 pt-8 sm:grid-cols-3">
+            <dl className={`grid grid-cols-2 gap-x-6 gap-y-10 pb-16 pt-8 sm:grid-cols-3 ${metrics.length === 4 ? "lg:grid-cols-4" : ""}`}>
               {metrics.map((m) => (
                 <Stat key={m.label} metric={m} />
               ))}
@@ -125,7 +126,7 @@ export function Section({
       className={`scroll-mt-8 py-16 sm:py-20 ${first ? "" : "border-t border-zinc-200 dark:border-zinc-800"}`}
     >
       <p className="font-mono text-xs text-indigo-700 dark:text-indigo-400">{index}</p>
-      <h2 id={`${id}-title`} className="mt-3 text-4xl font-bold tracking-[-0.03em] text-neutral-950 sm:text-5xl dark:text-white">
+      <h2 id={`${id}-title`} className={`mt-3 text-4xl font-semibold tracking-[-0.02em] text-neutral-950 sm:text-5xl dark:text-white ${rounded.className}`}>
         {title}
       </h2>
       <div className="mt-12">{children}</div>

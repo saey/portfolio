@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
 import Link from "next/link";
 import { ContactForm } from "./_components/ContactForm";
+import { rounded } from "./fonts";
 import { HomeTabs, INK } from "./_components/HomeTabs";
 import { ImageSlot } from "./projects/_components/ImageSlot";
 
@@ -10,9 +10,6 @@ export const metadata: Metadata = {
   description:
     "Product design and strategy: design systems, accessibility and enterprise product work.",
 };
-
-/** Rounded face for the saeworks wordmark only. */
-const brand = Nunito({ subsets: ["latin"], weight: "600" });
 
 /** Thumbnails live in /public/projects/top-page/<name>.<ext>. */
 const THUMB_DIR = "projects/top-page";
@@ -62,14 +59,15 @@ const PROJECTS: Project[] = [
   },
   {
     index: "04",
-    title: "Quork Board: Resourcing",
+    title: "Quork Board: Billing & Invoice",
     summary:
-      "Planning and assigning people across projects in an enterprise SaaS board.",
-    tags: ["Enterprise SaaS", "Resource Management"],
+      "Streamlining multi-entity invoicing, automated reconciliation, and approval workflows for enterprise financial operations.",
+    tags: ["Enterprise SaaS", "Financial Workflows", "Invoice Automation"],
     image: {
-      name: "Quork+Board+-+Resourcing",
-      alt: "Quork Board resourcing screens",
+      name: "Quork+Board+-+Timesheet+Invoice+Billing_G",
+      alt: "Quork Board billing, invoice and timesheet screens",
     },
+    href: "/projects/quorkboard-billing",
   },
 ];
 
@@ -109,7 +107,7 @@ export default function Home() {
           title={
             <h1>
               <span
-                className={`block text-[38px] leading-none font-semibold tracking-[-0.01em] ${brand.className} ${INK.strong}`}
+                className={`block text-[38px] leading-none font-semibold tracking-[-0.01em] ${rounded.className} ${INK.strong}`}
               >
                 saeworks
               </span>

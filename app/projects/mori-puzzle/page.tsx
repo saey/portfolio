@@ -15,7 +15,7 @@ import { KANJI_FONT } from "./_components/kanji";
 import { PrototypeStage } from "./_components/PrototypeStage";
 import { RadicalExplorer } from "./_components/RadicalExplorer";
 import { Captioned, FRAME, Frame, Gallery } from "./_components/Frame";
-import { ImageTabs } from "./_components/ImageTabs";
+import { ImageTabs } from "../_components/ImageTabs";
 import { RecordingSlot } from "./_components/RecordingSlot";
 import { StyleGuide } from "./_components/StyleGuide";
 
