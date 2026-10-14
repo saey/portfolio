@@ -74,8 +74,9 @@ const PROJECTS: Project[] = [
 ];
 
 const FOCUS = [
-  "Design Systems",
+  "Product Design",
   "Product Strategy",
+  "Design Systems",
   "Accessibility",
   "Mentorship",
 ];
