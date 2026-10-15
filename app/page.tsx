@@ -92,7 +92,7 @@ const EMAIL = "y.okeas.3mstk@gmail.com";
 /** Extra links above the copyright; entries without an href are hidden. */
 const CONTACT = [{ label: "LinkedIn", href: "" }];
 
-const LABEL = `text-xs uppercase tracking-widest ${INK.muted}`;
+const LABEL = `text-xs uppercase tracking-widest text-[#47447e] dark:text-[#c5c3df]`;
 
 const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-700 dark:focus-visible:outline-indigo-400";
@@ -180,7 +180,7 @@ function AboutList({ label, items }: { label: string; items: string[] }) {
   return (
     <div>
       <h2 className={LABEL}>{label}</h2>
-      <ul className={`mt-5 space-y-2 text-base ${INK.body}`}>
+      <ul className={`mt-5 space-y-2 text-base text-[#47447e] dark:text-[#c5c3df]`}>
         {items.map((i) => (
           <li key={i}>{i}</li>
         ))}
