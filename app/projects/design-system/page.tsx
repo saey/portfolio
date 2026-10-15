@@ -403,7 +403,7 @@ export default function DesignSystemCaseStudy() {
               </Body>
               <div className="mt-8 grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
                 <div>
-                  <pre className="rounded-xl bg-zinc-50 p-5 font-mono text-xs leading-7 text-zinc-600 dark:text-zinc-400">
+                  <pre className="rounded-xl bg-white p-5 font-mono text-xs leading-7 text-zinc-600 dark:bg-zinc-900/60 dark:text-zinc-400">
                     {`Theme          59  color switching
 Responsive EN  88  language × responsive
 └ Responsive JA
