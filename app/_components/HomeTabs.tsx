@@ -81,14 +81,14 @@ export function HomeTabs({
         onKeyDown={(e) => onKeyDown(e, i)}
         className={`group relative rounded-full transition-colors ${focusRing} ${
           t.bottom
-            ? `text-sm font-medium ${
+            ? `text-xs font-medium ${
                 selected
-                  ? "text-[#4F46E5] dark:text-indigo-300"
-                  : "text-[#8a89a9] hover:text-[#4F46E5] hover:underline hover:underline-offset-4 dark:text-[#8f8ea8] dark:hover:text-indigo-300"
+                  ? "text-[#4c46b9] dark:text-indigo-300"
+                  : "text-[#5a5699] hover:text-[#4c46b9] hover:underline hover:underline-offset-4 dark:text-[#acaacf] dark:hover:text-indigo-300"
               }`
-            : `px-4 py-2 text-lg font-semibold ${
+            : `px-4 py-2 text-lg font-semibold uppercase tracking-[0.06em] ${
                 selected
-                  ? "text-[#4F46E5] dark:text-indigo-300"
+                  ? "text-[#4c46b9] dark:text-indigo-300"
                   : "text-[#64748B] hover:text-[#334155] dark:text-slate-400 dark:hover:text-white"
               }`
         }`}
@@ -101,7 +101,7 @@ export function HomeTabs({
             aria-hidden
             className={`absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full transition-[scale,background-color] duration-300 ease-out motion-reduce:transition-none ${
               selected
-                ? "scale-x-100 bg-[#4F46E5] dark:bg-indigo-300"
+                ? "scale-x-100 bg-[#4c46b9] dark:bg-indigo-300"
                 : "scale-x-0 bg-[#94a3b8] group-hover:scale-x-100 group-focus-visible:scale-x-100 dark:bg-slate-500"
             }`}
           />
