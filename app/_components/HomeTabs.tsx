@@ -82,18 +82,28 @@ export function HomeTabs({
         onClick={() => setActive(t.id)}
         onKeyDown={(e) => onKeyDown(e, i)}
         className={`group flex items-center rounded text-left transition-colors ${focusRing} ${
-          t.bottom ? "text-xs" : "-my-[2.5px] gap-2 text-lg leading-none"
+          t.bottom ? "text-xs" : "-my-[2.5px] text-lg leading-none"
         } ${i === firstBottom ? "lg:mt-auto" : ""} ${
           selected
             ? `font-semibold ${INK.accent}`
             : t.bottom
               ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
-              : "font-normal text-[#5d5486] hover:text-[#4329a6] dark:text-[#b4acd6] dark:hover:text-indigo-300"
+              : "font-medium text-[#5d5486] hover:text-[#4329a6] dark:text-[#b4acd6] dark:hover:text-indigo-300"
         }`}
       >
         {!t.bottom && (
-          // The arrow keeps its slot when hidden, so labels don't shift on selection.
-          <ArrowIcon className={`h-4 w-4 shrink-0 transition-all duration-200 ${selected ? "" : "-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} />
+          // Collapsed at rest so labels sit flush left; on hover, focus or
+          // selection the slot opens and the label slides right.
+          <span
+            aria-hidden
+            className={`flex shrink-0 overflow-hidden transition-all duration-300 ease-out motion-reduce:transition-none ${
+              selected
+                ? "w-6 opacity-100"
+                : "w-0 opacity-0 group-hover:w-6 group-hover:opacity-100 group-focus-visible:w-6 group-focus-visible:opacity-100"
+            }`}
+          >
+            <ArrowIcon className="h-4 w-4 shrink-0" />
+          </span>
         )}
         {t.label}
       </button>
@@ -113,10 +123,10 @@ export function HomeTabs({
             aria-orientation="vertical"
             className="mt-10 flex flex-wrap items-center lg:mt-16 gap-x-6 gap-y-4 lg:flex-1 lg:flex-col lg:items-start"
           >
-            {/* A violet rule runs down the left of the main tabs; the active one gets an arrow. */}
+            {/* Main tabs; the active one (and any hovered one) gets an arrow. */}
             <div
               role="none"
-              className="flex gap-x-6 gap-y-[18px] border-l-4 border-[#4329a6] pl-4 lg:flex-col dark:border-indigo-400"
+              className="flex gap-x-6 gap-y-[18px] lg:flex-col"
             >
               {tabs.map((t, i) => (t.bottom ? null : renderTab(t, i)))}
             </div>

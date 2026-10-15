@@ -107,12 +107,12 @@ export default function Home() {
           title={
             <h1>
               <span
-                className={`block text-[32px] leading-none font-bold tracking-[-0.01em] ${rounded.className} ${INK.strong}`}
+                className={`block text-[32px] leading-none font-bold tracking-[-0.01em] ${rounded.className} text-[#2c2464] dark:text-[#ddd8f0]`}
               >
                 saeworks
               </span>
               <span
-                className={`mt-2 block text-[15px] leading-5 font-normal ${INK.body}`}
+                className={`mt-2 block text-[15px] leading-5 font-medium text-[#5c5390] dark:text-[#c0b8e0]`}
               >
                 Product Design
                 <br />
