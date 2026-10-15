@@ -65,6 +65,65 @@ export function HomeTabs({
 
   const firstBottom = tabs.findIndex((t) => t.bottom);
 
+  // Tabs are split into a main group (marked by the violet rule) and the
+  // quiet bottom links; indices stay those of the full list for refs/keys.
+  const renderTab = (t: HomeTab, i: number) => {
+    const selected = t.id === active;
+    return (
+      <button
+        key={t.id}
+        ref={(el) => {
+          refs.current[i] = el;
+        }}
+        type="button"
+        role="tab"
+        id={`tab-${t.id}`}
+        aria-controls={`panel-${t.id}`}
+        aria-selected={selected}
+        tabIndex={selected ? 0 : -1}
+        onClick={() => setActive(t.id)}
+        onKeyDown={(e) => onKeyDown(e, i)}
+        className={`group/tab rounded text-left transition-colors ${focusRing} ${
+          t.bottom
+            ? "text-xs"
+            : // Caps read larger and denser, so a smaller size with open
+              // tracking keeps the menu calm next to the wordmark.
+              "flex text-xl leading-none uppercase tracking-[0.04em]"
+        } ${i === firstBottom ? "lg:mt-auto" : ""} ${
+          selected
+            ? t.bottom
+              ? `font-semibold ${INK.accent}`
+              : "font-bold text-[#4F46E5] dark:text-indigo-300"
+            : t.bottom
+              ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
+              : "font-medium text-[#64748B] hover:text-[#0F172A] dark:text-zinc-400 dark:hover:text-white"
+        }`}
+      >
+        {t.bottom ? (
+          t.label
+        ) : (
+          // Arrow stays out on the selected tab and slides in from the left
+          // on hover/focus for the others.
+          // Text is trimmed to the cap height so the violet rule's padding
+          // sits evenly above CASE STUDIES and below ABOUT.
+          <span className="inline-flex items-center [&>*]:[text-box:trim-both_cap_alphabetic]">
+            <span
+              aria-hidden="true"
+              className={`inline-block overflow-hidden whitespace-nowrap transition-all duration-300 ease-out motion-reduce:transition-none ${
+                selected
+                  ? "w-7 translate-x-0 opacity-100"
+                  : "w-0 -translate-x-2 opacity-0 group-hover/tab:w-7 group-hover/tab:translate-x-0 group-hover/tab:opacity-100 group-focus-visible/tab:w-7 group-focus-visible/tab:translate-x-0 group-focus-visible/tab:opacity-100"
+              }`}
+            >
+              →
+            </span>
+            <span>{t.label}</span>
+          </span>
+        )}
+      </button>
+    );
+  };
+
   return (
     // Large screens: the row is centered in the viewport and the left rail
     // stretches to the panel's height, so its top and bottom line up with it.
@@ -76,38 +135,12 @@ export function HomeTabs({
             role="tablist"
             aria-label="Sections"
             aria-orientation="vertical"
-            className="mt-10 flex flex-wrap items-baseline gap-x-6 gap-y-2 lg:flex-1 lg:flex-col lg:items-start lg:gap-3"
+            className="mt-16 flex flex-wrap items-baseline gap-x-6 gap-y-3 lg:flex-1 lg:flex-col lg:items-start lg:gap-4"
           >
-            {tabs.map((t, i) => {
-              const selected = t.id === active;
-              return (
-                <button
-                  key={t.id}
-                  ref={(el) => {
-                    refs.current[i] = el;
-                  }}
-                  type="button"
-                  role="tab"
-                  id={`tab-${t.id}`}
-                  aria-controls={`panel-${t.id}`}
-                  aria-selected={selected}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => setActive(t.id)}
-                  onKeyDown={(e) => onKeyDown(e, i)}
-                  className={`rounded text-left transition-colors ${focusRing} ${
-                    t.bottom ? "text-xs" : "text-[15px]"
-                  } ${i === firstBottom ? "lg:mt-auto" : ""} ${
-                    selected
-                      ? `${t.bottom ? "font-semibold" : "font-medium"} ${INK.accent}`
-                      : t.bottom
-                        ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
-                        : "font-normal text-neutral-500 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
-                  }`}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
+            <div className="flex flex-col items-start gap-6 border-l-4 border-indigo-500 py-1 pl-6 dark:border-indigo-400">
+              {tabs.map((t, i) => (t.bottom ? null : renderTab(t, i)))}
+            </div>
+            {tabs.map((t, i) => (t.bottom ? renderTab(t, i) : null))}
           </div>
           <div className="mt-3 hidden lg:block">{footer}</div>
         </header>

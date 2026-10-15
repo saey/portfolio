@@ -28,7 +28,7 @@ export function CaseStudyLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex-1 bg-white font-sans text-zinc-900 selection:bg-indigo-200 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-indigo-900">
+    <div className="flex-1 bg-[#F9FAFB] font-sans text-zinc-900 selection:bg-indigo-200 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-indigo-900">
       <div className="bg-indigo-800 text-white dark:bg-indigo-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <header className={metrics?.length ? "pt-10" : "pb-20 pt-10"}>

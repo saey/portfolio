@@ -101,18 +101,18 @@ export default function Home() {
   const contact = CONTACT.filter((c) => c.href);
 
   return (
-    <div className="flex-1 bg-white font-sans text-[#1e1b2e] selection:bg-indigo-200 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-indigo-900">
+    <div className="flex-1 bg-[#F9FAFB] font-sans text-[#1e1b2e] selection:bg-indigo-200 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-indigo-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <HomeTabs
           title={
             <h1>
               <span
-                className={`block text-[38px] leading-none font-semibold tracking-[-0.01em] ${rounded.className} ${INK.strong}`}
+                className={`block text-[32px] leading-none font-bold tracking-[-0.01em] ${rounded.className} text-[#0F172A] dark:text-white`}
               >
                 saeworks
               </span>
               <span
-                className={`mt-4 block text-[13px] leading-5 font-medium tracking-[0.08em] uppercase ${INK.body}`}
+                className={`mt-1.5 block text-[15px] leading-snug font-medium tracking-[0.01em] text-[#475569] dark:text-slate-400`}
               >
                 Product Design
                 <br />
@@ -224,9 +224,16 @@ function ProjectTile({ project: p }: { project: Project }) {
     </>
   );
 
+  // Linked tiles lift with a soft shadow on hover; upcoming ones stay put.
   const tile = (
     <>
-      <span className="relative block overflow-hidden rounded-lg">
+      <span
+        className={`relative isolate block overflow-hidden rounded-xl border border-gray-200 transition-[translate,border-color] duration-300 ease-out motion-reduce:transition-none dark:border-zinc-800 ${
+          upcoming
+            ? ""
+            : "group-hover:-translate-y-1 group-hover:border-gray-300 group-focus-visible:-translate-y-1 group-focus-visible:border-gray-300 motion-reduce:group-hover:translate-y-0 dark:group-hover:border-zinc-700"
+        }`}
+      >
         <ImageSlot
           dir={THUMB_DIR}
           name={p.image.name}
@@ -235,7 +242,9 @@ function ProjectTile({ project: p }: { project: Project }) {
           sizes="(min-width: 1280px) 620px, (min-width: 768px) 50vw, 100vw"
           className="transition-transform duration-500 ease-out group-hover:scale-[1.02]"
         />
-        <span className="absolute inset-0 hidden flex-col justify-end bg-neutral-900/70 p-6 text-white opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-8 [@media(hover:hover)]:flex">
+        <span
+          className={`absolute inset-0 hidden flex-col justify-end bg-neutral-900/70 p-6 text-white opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-8 [@media(hover:hover)]:flex`}
+        >
           {details}
         </span>
       </span>
@@ -254,7 +263,7 @@ function ProjectTile({ project: p }: { project: Project }) {
   }
 
   return (
-    <Link href={p.href} className={`group block rounded-lg ${focusRing}`}>
+    <Link href={p.href} className={`group block rounded-xl ${focusRing}`}>
       {tile}
     </Link>
   );
