@@ -1,4 +1,4 @@
 import { Nunito } from "next/font/google";
 
 /** Rounded face shared by the saeworks wordmark and case-study section headings. */
-export const rounded = Nunito({ subsets: ["latin"], weight: ["600", "700"] });
+export const rounded = Nunito({ subsets: ["latin"] }); // variable, so in-between weights like 650 work

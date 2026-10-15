@@ -107,7 +107,7 @@ export default function Home() {
           title={
             <h1>
               <span
-                className={`block text-[46px] leading-none font-semibold sm:font-bold tracking-[-0.01em] ${rounded.className} text-[#5a5699] dark:text-[#acaacf]`}
+                className={`block text-[40px] sm:text-[46px] leading-none font-[650] sm:font-bold tracking-[-0.01em] ${rounded.className} text-[#5a5699] dark:text-[#acaacf]`}
               >
                 saeworks
               </span>
