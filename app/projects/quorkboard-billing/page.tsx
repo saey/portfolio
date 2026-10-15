@@ -346,9 +346,9 @@ export default function QuorkBoardBillingCaseStudy() {
       <div className="pt-16">
         <ImageSlot
           dir={DIR}
-          name="hero"
+          name="Quork Board - Timesheet Invoice Billing"
           alt="Quork Board timesheet, billing and invoice screens"
-          aspect="aspect-[2480/1177]"
+          aspect="aspect-[2896/1376]"
           sizes="(min-width: 1280px) 1000px, 100vw"
           className="rounded-2xl"
         />

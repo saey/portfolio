@@ -32,7 +32,7 @@ const PROJECTS: Project[] = [
       "Streamlining multi-entity invoicing, automated reconciliation, and approval workflows for enterprise financial operations.",
     tags: ["Enterprise SaaS", "Financial Workflows", "Invoice Automation"],
     image: {
-      name: "Quork+Board+-+Timesheet+Invoice+Billing_G",
+      name: "Quork Board - Timesheet Invoice Billing",
       alt: "Quork Board billing, invoice and timesheet screens",
     },
     href: "/projects/quorkboard-billing",
