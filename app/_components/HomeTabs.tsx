@@ -81,10 +81,10 @@ export function HomeTabs({
         onKeyDown={(e) => onKeyDown(e, i)}
         className={`group relative rounded-full transition-colors ${focusRing} ${
           t.bottom
-            ? `text-xs font-medium ${
+            ? `pb-2 text-xs font-medium ${
                 selected
                   ? "text-[#4c46b9] dark:text-indigo-300"
-                  : "text-[#5a5699] hover:text-[#4c46b9] hover:underline hover:underline-offset-4 dark:text-[#acaacf] dark:hover:text-indigo-300"
+                  : "text-[#5a5699] hover:text-[#3b3870] dark:text-[#acaacf] dark:hover:text-white"
               }`
             : `px-4 py-2 text-lg font-semibold ${
                 selected
@@ -93,19 +93,24 @@ export function HomeTabs({
               }`
         }`}
       >
-        {t.label}
-        {!t.bottom && (
-          // Indicator under the label: full on the active tab, grows out
-          // from the center on hover or focus for the others.
-          <span
-            aria-hidden
-            className={`absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full transition-[scale,background-color] duration-300 ease-out motion-reduce:transition-none ${
-              selected
-                ? "scale-x-100 bg-[#4c46b9] dark:bg-indigo-300"
-                : "scale-x-0 bg-[#94a3b8] group-hover:scale-x-100 group-focus-visible:scale-x-100 dark:bg-slate-500"
-            }`}
-          />
+        {t.bottom && t.label.endsWith(":)") ? (
+          <>
+            {t.label.slice(0, -1)}
+            <Grin on={selected} />
+          </>
+        ) : (
+          t.label
         )}
+        {/* Indicator under the label: full on the active tab, grows out
+            from the center on hover or focus for the others. */}
+        <span
+          aria-hidden
+          className={`absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full transition-[scale,background-color] duration-300 ease-out motion-reduce:transition-none ${
+            selected
+              ? "scale-x-100 bg-[#4c46b9] dark:bg-indigo-300"
+              : "scale-x-0 bg-[#94a3b8] group-hover:scale-x-100 group-focus-visible:scale-x-100 dark:bg-slate-500"
+          }`}
+        />
       </button>
     );
   };
@@ -119,10 +124,11 @@ export function HomeTabs({
         </div>
       </header>
 
+      {/* Nudged left: the longer "Case Studies" makes a true center read right-heavy. */}
       <div
         role="tablist"
         aria-label="Sections"
-        className="flex items-center gap-2"
+        className="flex -translate-x-2.5 items-center gap-2"
       >
         {tabs.map((t, i) => (t.bottom ? null : renderTab(t, i)))}
       </div>
@@ -152,5 +158,34 @@ export function HomeTabs({
 
       <footer className="pt-6 pb-12 text-center">{footer}</footer>
     </div>
+  );
+}
+
+/** The ")" of a ":)" that breaks into a ":D" grin while its tab is selected, hovered or focused. */
+function Grin({ on }: { on: boolean }) {
+  const layer =
+    "[grid-area:1/1] transition-[opacity,scale] motion-reduce:transition-none";
+  return (
+    <span className="inline-grid justify-items-start">
+      <span
+        className={`${layer} duration-150 ${
+          on
+            ? "scale-50 opacity-0"
+            : "group-hover:scale-50 group-hover:opacity-0 group-focus-visible:scale-50 group-focus-visible:opacity-0"
+        }`}
+      >
+        )
+      </span>
+      <span
+        aria-hidden
+        className={`${layer} duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+          on
+            ? "scale-100 opacity-100"
+            : "scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
+        }`}
+      >
+        D
+      </span>
+    </span>
   );
 }
