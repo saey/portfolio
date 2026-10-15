@@ -268,6 +268,7 @@ export default function DesignSystemCaseStudy() {
               <BeforeAfter
                 title="Content Grid"
                 minimal
+                compareFirst
                 before={<ImageSlot {...IMAGES.gridBefore} aspect="aspect-[1928/930]" fit="contain" className="rounded-xl" />}
                 after={<ImageSlot {...IMAGES.gridAfter} aspect="aspect-[1938/1400]" className="rounded-xl" />}
                 beforeNotes={<LegacyGrids />}

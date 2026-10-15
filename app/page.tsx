@@ -53,7 +53,7 @@ const PROJECTS: Project[] = [
       "Rebuilding an agency-made library into role-based semantic tokens — accessible by default and built around AEM.",
     tags: ["Enterprise Architecture", "Accessibility", "AEM"],
     image: {
-      name: "Apple+Cinema+display+in+home+office",
+      name: "design-system-square",
       alt: "Asset allocation screen on a desktop display",
     },
     href: "/projects/design-system",

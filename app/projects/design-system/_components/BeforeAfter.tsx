@@ -18,7 +18,7 @@ type BeforeAfterProps = {
   after: ReactNode;
   beforeCaption?: string;
   afterCaption?: string;
-  /** Optional notes: left of the image in Before/After, aligned below both images in Compare. */
+  /** Optional notes: right of the image in Before/After, aligned below both images in Compare. */
   beforeNotes?: ReactNode;
   afterNotes?: ReactNode;
   /** Hides the visible title and the Before/After tags when the surrounding heading already names the example. */
@@ -87,11 +87,12 @@ export function BeforeAfter({
       )}
 
       {hasNotes && mode !== "compare" && (
-        <div className="grid gap-8 md:grid-cols-[2fr_3fr] md:gap-10">
-          <div className="order-2 md:order-1">
+        // Image on the left, its notes beside it on the right; stacked on mobile.
+        <div className="grid gap-8 md:grid-cols-[3fr_2fr] md:gap-10">
+          <div className="order-2">
             {mode === "before" ? beforeNotes : afterNotes}
           </div>
-          <div className="order-1 md:order-2">
+          <div className="order-1">
             {mode === "before" ? (
               <Pane
                 tag={minimal ? undefined : "Before"}
