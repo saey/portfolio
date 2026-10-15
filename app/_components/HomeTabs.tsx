@@ -86,7 +86,7 @@ export function HomeTabs({
                   ? "text-[#4c46b9] dark:text-indigo-300"
                   : "text-[#5a5699] hover:text-[#4c46b9] hover:underline hover:underline-offset-4 dark:text-[#acaacf] dark:hover:text-indigo-300"
               }`
-            : `px-4 py-2 text-lg font-semibold uppercase tracking-[0.06em] ${
+            : `px-4 py-2 text-lg font-semibold ${
                 selected
                   ? "text-[#4c46b9] dark:text-indigo-300"
                   : "text-[#64748B] hover:text-[#334155] dark:text-slate-400 dark:hover:text-white"
