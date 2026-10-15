@@ -22,6 +22,8 @@ type ImageSlotProps = ImageAsset & {
   className?: string;
   /** Folder under /public, e.g. "projects/mori-puzzle". */
   dir?: string;
+  /** Must be listed in images.qualities in next.config.ts. */
+  quality?: number;
 };
 
 function resolveFile(name: string, dir = PUBLIC_DIR): { src: string; file: string } | null {
@@ -92,6 +94,7 @@ export function ImageSlot({
   sizes = "(min-width: 1024px) 1024px, 100vw",
   className = "",
   dir = PUBLIC_DIR,
+  quality,
 }: ImageSlotProps) {
   const src = resolveFile(name, dir)?.src ?? null;
 
@@ -105,6 +108,7 @@ export function ImageSlot({
           alt={alt}
           fill
           sizes={sizes}
+          quality={quality}
           className={`${fit === "cover" ? "object-cover" : "object-contain"} ${
             position === "top" ? "object-top" : "object-center"
           }`}

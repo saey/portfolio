@@ -65,6 +65,41 @@ export function HomeTabs({
 
   const firstBottom = tabs.findIndex((t) => t.bottom);
 
+  const renderTab = (t: HomeTab, i: number) => {
+    const selected = t.id === active;
+    return (
+      <button
+        key={t.id}
+        ref={(el) => {
+          refs.current[i] = el;
+        }}
+        type="button"
+        role="tab"
+        id={`tab-${t.id}`}
+        aria-controls={`panel-${t.id}`}
+        aria-selected={selected}
+        tabIndex={selected ? 0 : -1}
+        onClick={() => setActive(t.id)}
+        onKeyDown={(e) => onKeyDown(e, i)}
+        className={`group flex items-center rounded text-left transition-colors ${focusRing} ${
+          t.bottom ? "text-xs" : "-my-[2.5px] gap-2 text-lg leading-none"
+        } ${i === firstBottom ? "lg:mt-auto" : ""} ${
+          selected
+            ? `font-semibold ${INK.accent}`
+            : t.bottom
+              ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
+              : "font-normal text-[#5d5486] hover:text-[#4329a6] dark:text-[#b4acd6] dark:hover:text-indigo-300"
+        }`}
+      >
+        {!t.bottom && (
+          // The arrow keeps its slot when hidden, so labels don't shift on selection.
+          <ArrowIcon className={`h-4 w-4 shrink-0 transition-all duration-200 ${selected ? "" : "-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} />
+        )}
+        {t.label}
+      </button>
+    );
+  };
+
   return (
     // Large screens: the row is centered in the viewport and the left rail
     // stretches to the panel's height, so its top and bottom line up with it.
@@ -76,38 +111,16 @@ export function HomeTabs({
             role="tablist"
             aria-label="Sections"
             aria-orientation="vertical"
-            className="mt-10 flex flex-wrap items-baseline gap-x-6 gap-y-2 lg:flex-1 lg:flex-col lg:items-start lg:gap-3"
+            className="mt-10 flex flex-wrap items-center lg:mt-16 gap-x-6 gap-y-4 lg:flex-1 lg:flex-col lg:items-start"
           >
-            {tabs.map((t, i) => {
-              const selected = t.id === active;
-              return (
-                <button
-                  key={t.id}
-                  ref={(el) => {
-                    refs.current[i] = el;
-                  }}
-                  type="button"
-                  role="tab"
-                  id={`tab-${t.id}`}
-                  aria-controls={`panel-${t.id}`}
-                  aria-selected={selected}
-                  tabIndex={selected ? 0 : -1}
-                  onClick={() => setActive(t.id)}
-                  onKeyDown={(e) => onKeyDown(e, i)}
-                  className={`rounded text-left transition-colors ${focusRing} ${
-                    t.bottom ? "text-xs" : "text-[15px]"
-                  } ${i === firstBottom ? "lg:mt-auto" : ""} ${
-                    selected
-                      ? `${t.bottom ? "font-semibold" : "font-medium"} ${INK.accent}`
-                      : t.bottom
-                        ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
-                        : "font-normal text-neutral-500 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-white"
-                  }`}
-                >
-                  {t.label}
-                </button>
-              );
-            })}
+            {/* A violet rule runs down the left of the main tabs; the active one gets an arrow. */}
+            <div
+              role="none"
+              className="flex gap-x-6 gap-y-[18px] border-l-4 border-[#4329a6] pl-4 lg:flex-col dark:border-indigo-400"
+            >
+              {tabs.map((t, i) => (t.bottom ? null : renderTab(t, i)))}
+            </div>
+            {tabs.map((t, i) => (t.bottom ? renderTab(t, i) : null))}
           </div>
           <div className="mt-3 hidden lg:block">{footer}</div>
         </header>
@@ -138,5 +151,22 @@ export function HomeTabs({
         <div className="pb-10 lg:hidden">{footer}</div>
       </div>
     </div>
+  );
+}
+
+function ArrowIcon({ className }: { className: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={className}
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
   );
 }

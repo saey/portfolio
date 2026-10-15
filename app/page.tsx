@@ -107,12 +107,12 @@ export default function Home() {
           title={
             <h1>
               <span
-                className={`block text-[38px] leading-none font-semibold tracking-[-0.01em] ${rounded.className} ${INK.strong}`}
+                className={`block text-[32px] leading-none font-bold tracking-[-0.01em] ${rounded.className} ${INK.strong}`}
               >
                 saeworks
               </span>
               <span
-                className={`mt-4 block text-[13px] leading-5 font-medium tracking-[0.08em] uppercase ${INK.body}`}
+                className={`mt-2 block text-[15px] leading-5 font-normal ${INK.body}`}
               >
                 Product Design
                 <br />
@@ -125,7 +125,7 @@ export default function Home() {
               id: "case-studies",
               label: "Case Studies",
               content: (
-                <ul className="grid gap-4 sm:gap-6 md:grid-cols-2">
+                <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
                   {PROJECTS.map((p) => (
                     <li key={p.index}>
                       <ProjectTile project={p} />
@@ -202,7 +202,7 @@ function ProjectTile({ project: p }: { project: Project }) {
 
   const details = (
     <>
-      <span className="flex items-center gap-3">
+      <span className="flex flex-wrap items-center gap-x-3 gap-y-2">
         <span className="text-xs uppercase tracking-widest opacity-70">
           Case Study {p.index}
         </span>
@@ -212,13 +212,13 @@ function ProjectTile({ project: p }: { project: Project }) {
           </span>
         )}
       </span>
-      <span className="mt-3 block text-lg font-medium leading-snug">
+      <span className="mt-3 block text-base font-medium leading-snug">
         {p.title}
       </span>
-      <span className="mt-2 line-clamp-2 max-w-md text-sm leading-snug opacity-80">
+      <span className="mt-2 line-clamp-3 text-[13px] leading-snug opacity-80">
         {p.summary}
       </span>
-      <span className="mt-4 block text-xs uppercase tracking-wider opacity-60">
+      <span className="mt-3 block text-[11px] uppercase tracking-wider opacity-60">
         {p.tags.join(" / ")}
       </span>
     </>
@@ -231,11 +231,13 @@ function ProjectTile({ project: p }: { project: Project }) {
           dir={THUMB_DIR}
           name={p.image.name}
           alt={p.image.alt}
-          aspect="aspect-[3/2]"
-          sizes="(min-width: 1280px) 620px, (min-width: 768px) 50vw, 100vw"
+          aspect="aspect-[3/4] lg:aspect-[2/5]"
+          // The stripe crops a landscape image, so it renders far wider than the card.
+          sizes="(min-width: 1024px) 840px, 100vw"
+          quality={90}
           className="transition-transform duration-500 ease-out group-hover:scale-[1.02]"
         />
-        <span className="absolute inset-0 hidden flex-col justify-end bg-neutral-900/70 p-6 text-white opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-8 [@media(hover:hover)]:flex">
+        <span className="absolute inset-0 hidden flex-col justify-end bg-neutral-900/75 p-4 text-white opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 xl:p-5 [@media(hover:hover)]:flex">
           {details}
         </span>
       </span>
