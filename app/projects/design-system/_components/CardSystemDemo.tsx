@@ -35,23 +35,16 @@ export function CardSystemDemo() {
   const [view, setView] = useState<View>("compare");
   const [block, setBlock] = useState<BlockVariant>("compact");
   const [list, setList] = useState<ListVariant>("horizontal");
-  const [targets, setTargets] = useState<"on" | "off">("on");
-  const show = targets === "on";
+  const [show, setShow] = useState(true);
 
   return (
     <div className={STAGE}>
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
         <Toggle label="Card view" options={VIEWS} value={view} onChange={setView} size="md" level={1} />
-        <Toggle
-          label="Link targets"
-          options={[{ id: "on", label: "Show link targets" }, { id: "off", label: "Hide" }] as const}
-          value={targets}
-          onChange={setTargets}
-          level={1}
-        />
+        <Switch label="Show link targets" checked={show} onChange={setShow} />
       </div>
 
-      <div className="mt-6">
+      <div className="mt-10">
         {view === "before" && <BeforeCards show={show} />}
 
         {view !== "before" && (
@@ -422,5 +415,42 @@ function BeforeCards({ show }: { show: boolean }) {
         </ul>
       </div>
     </div>
+  );
+}
+
+/** On/off switch with its label; the whole row is clickable. */
+function Switch({
+  label,
+  checked,
+  onChange,
+}: {
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      onClick={() => onChange(!checked)}
+      className="group flex items-center gap-3 rounded-full text-sm text-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-700 dark:text-zinc-300"
+    >
+      {label}
+      <span
+        aria-hidden
+        className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200 motion-reduce:transition-none ${
+          checked
+            ? "bg-indigo-700 dark:bg-indigo-500"
+            : "bg-zinc-300 group-hover:bg-zinc-400 dark:bg-zinc-700 dark:group-hover:bg-zinc-600"
+        }`}
+      >
+        <span
+          className={`h-5 w-5 rounded-full bg-white shadow-sm transition-[translate] duration-200 ease-out motion-reduce:transition-none ${
+            checked ? "translate-x-[22px]" : "translate-x-0.5"
+          }`}
+        />
+      </span>
+    </button>
   );
 }

@@ -79,14 +79,16 @@ export function HomeTabs({
         tabIndex={selected ? 0 : -1}
         onClick={() => setActive(t.id)}
         onKeyDown={(e) => onKeyDown(e, i)}
-        className={`group relative rounded-full transition-colors ${focusRing} ${
+        className={`group relative cursor-pointer rounded-full ${focusRing} ${
           t.bottom
-            ? `pb-2 text-xs font-medium ${
+            ? // Soft color shift on hover, a small press bounce on click, and a
+              // faint violet glow while the contact form is open.
+              `pb-2 text-xs font-medium transition-[color,scale,text-shadow] duration-300 ease-in-out active:scale-95 motion-reduce:transition-none motion-reduce:active:scale-100 ${
                 selected
-                  ? "text-[#4c46b9] dark:text-indigo-300"
+                  ? "text-[#4c46b9] [text-shadow:0_0_12px_rgb(76_70_185/0.35)] dark:text-indigo-300 dark:[text-shadow:0_0_12px_rgb(165_180_252/0.4)]"
                   : "text-[#5a5699] hover:text-[#3b3870] dark:text-[#acaacf] dark:hover:text-white"
               }`
-            : `px-4 py-2 text-lg font-semibold ${
+            : `px-4 py-2 text-lg font-semibold transition-colors ${
                 selected
                   ? "text-[#4c46b9] dark:text-indigo-300"
                   : "text-[#64748B] hover:text-[#334155] dark:text-slate-400 dark:hover:text-white"
@@ -161,27 +163,30 @@ export function HomeTabs({
   );
 }
 
-/** The ")" of a ":)" that breaks into a ":D" grin while its tab is selected, hovered or focused. */
+/**
+ * The ")" of a ":)" that opens into a ":D" while its tab is selected, hovered
+ * or focused: the "D" starts squeezed thin against its flat edge, much like
+ * the ")", then springs open to full width.
+ */
 function Grin({ on }: { on: boolean }) {
-  const layer =
-    "[grid-area:1/1] transition-[opacity,scale] motion-reduce:transition-none";
+  const layer = "[grid-area:1/1] motion-reduce:transition-none";
   return (
     <span className="inline-grid justify-items-start">
       <span
-        className={`${layer} duration-150 ${
+        className={`${layer} transition-opacity duration-100 ${
           on
-            ? "scale-50 opacity-0"
-            : "group-hover:scale-50 group-hover:opacity-0 group-focus-visible:scale-50 group-focus-visible:opacity-0"
+            ? "opacity-0"
+            : "group-hover:opacity-0 group-focus-visible:opacity-0"
         }`}
       >
         )
       </span>
       <span
         aria-hidden
-        className={`${layer} duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+        className={`${layer} origin-left transition-[opacity,scale] duration-[450ms] ease-[cubic-bezier(0.45,1.7,0.5,1)] ${
           on
             ? "scale-100 opacity-100"
-            : "scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
+            : "scale-x-[0.2] scale-y-90 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100"
         }`}
       >
         D

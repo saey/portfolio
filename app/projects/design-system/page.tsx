@@ -73,6 +73,12 @@ const ICONS = {
       <path d="M9 3v18M15 3v18" />
     </svg>
   ),
+  ratios: (
+    <svg {...iconProps}>
+      <rect x="2" y="6" width="20" height="12" rx="2" />
+      <path d="M6 10V9h2M18 14v1h-2" />
+    </svg>
+  ),
   // Half-filled circle: light and dark.
   modes: (
     <svg {...iconProps}>
@@ -520,11 +526,12 @@ Brand         195`}
                 <Em>The Figma components had to flex the same way the code does.</Em>
               </Lead>
               <List
-                cols={3}
+                cols={4}
                 items={[
                   ["Elastic components", "Removed rigid line objects and fixed heights; text overflow and truncation are specified per component.", ICONS.elastic],
                   ["Authoring behavior", "Re-specified component behavior around the authoring experience.", ICONS.authoring],
                   ["Grid alignment", "Components adapt to the grid system and its sizing.", ICONS.grid],
+                  ["Image aspect ratios", "Dynamic Media allows one profile per folder, so renditions should stay minimal: 22 → 7 ratios.", ICONS.ratios],
                 ]}
               />
 
