@@ -168,7 +168,7 @@ const METRICS: Metric[] = [
 
 export default function DesignSystemCaseStudy() {
   return (
-    <div className="flex-1 bg-white font-sans text-zinc-900 selection:bg-indigo-200 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-indigo-900">
+    <div className="flex-1 bg-[#F9FAFB] font-sans text-zinc-900 selection:bg-indigo-200 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-indigo-900">
       {/* Header band */}
       <div className="bg-indigo-800 text-white dark:bg-indigo-950">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
@@ -231,9 +231,9 @@ export default function DesignSystemCaseStudy() {
                 }
                 right={
                   <Block label="Outcome">
-                    <Em>I led a full refactor toward role-based semantic tokens,</Em>{" "}
-                    fixed accessibility at the component level, and aligned the
-                    library with AEM and engineering — using Claude for a token
+                    <Em>A full refactor toward role-based semantic tokens,</Em>{" "}
+                    accessibility fixed at the component level, and a library
+                    aligned with AEM and engineering — using Claude for a token
                     audit and Figma MCP for hand-off to code.
                   </Block>
                 }
