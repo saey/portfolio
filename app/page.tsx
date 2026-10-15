@@ -107,16 +107,12 @@ export default function Home() {
           title={
             <h1>
               <span
-                className={`block text-[32px] leading-none font-bold tracking-[-0.01em] ${rounded.className} text-[#2c2464] dark:text-[#ddd8f0]`}
+                className={`block text-[40px] leading-none font-bold tracking-[-0.01em] ${rounded.className} text-[#5a5699] dark:text-[#acaacf]`}
               >
                 saeworks
               </span>
-              <span
-                className={`mt-2 block text-[15px] leading-5 font-medium text-[#5c5390] dark:text-[#c0b8e0]`}
-              >
-                Product Design
-                <br />
-                &amp; Strategy
+              <span className="mt-1.5 block text-base leading-snug font-medium text-[#5a5699] dark:text-[#acaacf]">
+                Product Design &amp; Strategy
               </span>
             </h1>
           }
@@ -125,7 +121,7 @@ export default function Home() {
               id: "case-studies",
               label: "Case Studies",
               content: (
-                <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+                <ul className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
                   {PROJECTS.map((p) => (
                     <li key={p.index}>
                       <ProjectTile project={p} />
@@ -139,7 +135,7 @@ export default function Home() {
               label: "About",
               centered: true,
               content: (
-                <div className="grid w-full max-w-xl gap-12 sm:grid-cols-2">
+                <div className="flex flex-wrap justify-center gap-x-20 gap-y-12 text-center">
                   <AboutList label="Core Focus" items={FOCUS} />
                   <AboutList label="Brands" items={CLIENTS} />
                 </div>
@@ -156,7 +152,7 @@ export default function Home() {
           footer={
             <div className={`space-y-2 text-[11px] ${INK.muted}`}>
               {contact.length > 0 && (
-                <div className="flex gap-4">
+                <div className="flex justify-center gap-4">
                   {contact.map((c) => (
                     <a
                       key={c.label}
@@ -228,7 +224,7 @@ function ProjectTile({ project: p }: { project: Project }) {
   const tile = (
     <>
       <span
-        className={`relative isolate block overflow-hidden rounded-xl border border-gray-200 transition-[translate,border-color] duration-300 ease-out motion-reduce:transition-none dark:border-zinc-800 ${
+        className={`relative isolate block overflow-hidden rounded-2xl border border-gray-200 transition-[translate,border-color] duration-300 ease-out motion-reduce:transition-none dark:border-zinc-800 ${
           upcoming
             ? ""
             : "group-hover:-translate-y-1 group-hover:border-gray-300 group-focus-visible:-translate-y-1 group-focus-visible:border-gray-300 motion-reduce:group-hover:translate-y-0 dark:group-hover:border-zinc-700"
@@ -238,9 +234,9 @@ function ProjectTile({ project: p }: { project: Project }) {
           dir={THUMB_DIR}
           name={p.image.name}
           alt={p.image.alt}
-          aspect="aspect-[3/4] lg:aspect-[2/5]"
-          // The stripe crops a landscape image, so it renders far wider than the card.
-          sizes="(min-width: 1024px) 840px, 100vw"
+          aspect="aspect-square"
+          // The square crops a landscape image, so it renders wider than the card.
+          sizes="(min-width: 1280px) 440px, (min-width: 1024px) 36vw, 75vw"
           quality={90}
           className="transition-transform duration-500 ease-out group-hover:scale-[1.02]"
         />
@@ -263,7 +259,7 @@ function ProjectTile({ project: p }: { project: Project }) {
   }
 
   return (
-    <Link href={p.href} className={`group block rounded-xl ${focusRing}`}>
+    <Link href={p.href} className={`group block rounded-2xl ${focusRing}`}>
       {tile}
     </Link>
   );

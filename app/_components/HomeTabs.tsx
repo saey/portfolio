@@ -6,9 +6,9 @@ export type HomeTab = {
   id: string;
   label: string;
   content: ReactNode;
-  /** Pin the tab to the bottom of the left column as a small, quiet link. */
+  /** Show the tab as a small, quiet link under the title instead of in the tab row. */
   bottom?: boolean;
-  /** Center narrow content horizontally in the panel. */
+  /** Center narrow content horizontally at the top of the panel. */
   centered?: boolean;
 };
 
@@ -24,9 +24,9 @@ const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-700 dark:focus-visible:outline-indigo-400";
 
 /**
- * Title and vertical tabs on the left, the active panel on the right.
- * On large screens the left column fills the viewport, with bottom tabs and
- * the footer pinned to its end. On small screens everything stacks.
+ * Top-center layout. The title block takes the spare height of the viewport,
+ * so the tab row and the panel (the thumbnails) settle at the bottom of the
+ * first screen. Quiet tabs (contact) sit under the title.
  */
 export function HomeTabs({
   title,
@@ -63,8 +63,6 @@ export function HomeTabs({
     refs.current[next]?.focus();
   };
 
-  const firstBottom = tabs.findIndex((t) => t.bottom);
-
   const renderTab = (t: HomeTab, i: number) => {
     const selected = t.id === active;
     return (
@@ -81,102 +79,78 @@ export function HomeTabs({
         tabIndex={selected ? 0 : -1}
         onClick={() => setActive(t.id)}
         onKeyDown={(e) => onKeyDown(e, i)}
-        className={`group flex items-center rounded text-left transition-colors ${focusRing} ${
-          t.bottom ? "text-xs" : "-my-[2.5px] text-lg leading-none"
-        } ${i === firstBottom ? "lg:mt-auto" : ""} ${
-          selected
-            ? `font-semibold ${INK.accent}`
-            : t.bottom
-              ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
-              : "font-medium text-[#5d5486] hover:text-[#4329a6] dark:text-[#b4acd6] dark:hover:text-indigo-300"
+        className={`group relative rounded-full transition-colors ${focusRing} ${
+          t.bottom
+            ? `text-sm font-medium ${
+                selected
+                  ? "text-[#4F46E5] dark:text-indigo-300"
+                  : "text-[#8a89a9] hover:text-[#4F46E5] hover:underline hover:underline-offset-4 dark:text-[#8f8ea8] dark:hover:text-indigo-300"
+              }`
+            : `px-4 py-2 text-lg font-semibold ${
+                selected
+                  ? "text-[#4F46E5] dark:text-indigo-300"
+                  : "text-[#64748B] hover:text-[#334155] dark:text-slate-400 dark:hover:text-white"
+              }`
         }`}
       >
+        {t.label}
         {!t.bottom && (
-          // Collapsed at rest so labels sit flush left; on hover, focus or
-          // selection the slot opens and the label slides right.
+          // Indicator under the label: full on the active tab, grows out
+          // from the center on hover or focus for the others.
           <span
             aria-hidden
-            className={`flex shrink-0 overflow-hidden transition-all duration-300 ease-out motion-reduce:transition-none ${
+            className={`absolute bottom-0 left-1/2 h-0.5 w-5 -translate-x-1/2 rounded-full transition-[scale,background-color] duration-300 ease-out motion-reduce:transition-none ${
               selected
-                ? "w-6 opacity-100"
-                : "w-0 opacity-0 group-hover:w-6 group-hover:opacity-100 group-focus-visible:w-6 group-focus-visible:opacity-100"
+                ? "scale-x-100 bg-[#4F46E5] dark:bg-indigo-300"
+                : "scale-x-0 bg-[#94a3b8] group-hover:scale-x-100 group-focus-visible:scale-x-100 dark:bg-slate-500"
             }`}
-          >
-            <ArrowIcon className="h-4 w-4 shrink-0" />
-          </span>
+          />
         )}
-        {t.label}
       </button>
     );
   };
 
   return (
-    // Large screens: the row is centered in the viewport and the left rail
-    // stretches to the panel's height, so its top and bottom line up with it.
-    <div className="lg:flex lg:min-h-screen lg:items-center lg:py-16">
-      <div className="w-full lg:grid lg:grid-cols-[240px_1fr] lg:gap-16">
-        <header className="pt-16 pb-12 sm:pt-24 lg:flex lg:flex-col lg:p-0">
-          {title}
-          <div
-            role="tablist"
-            aria-label="Sections"
-            aria-orientation="vertical"
-            className="mt-10 flex flex-wrap items-center lg:mt-16 gap-x-6 gap-y-4 lg:flex-1 lg:flex-col lg:items-start"
-          >
-            {/* Main tabs; the active one (and any hovered one) gets an arrow. */}
-            <div
-              role="none"
-              className="flex gap-x-6 gap-y-[18px] lg:flex-col"
-            >
-              {tabs.map((t, i) => (t.bottom ? null : renderTab(t, i)))}
-            </div>
-            {tabs.map((t, i) => (t.bottom ? renderTab(t, i) : null))}
-          </div>
-          <div className="mt-3 hidden lg:block">{footer}</div>
-        </header>
+    <div className="flex min-h-svh flex-col items-center">
+      <header className="flex flex-1 flex-col items-center justify-center pt-20 pb-6 text-center [@media(min-height:800px)]:pt-36">
+        {title}
+        <div role="tablist" aria-label="Contact" className="mt-0.5">
+          {tabs.map((t, i) => (t.bottom ? renderTab(t, i) : null))}
+        </div>
+      </header>
 
-        {/* Panels share one grid cell, so the area keeps the height of the
-            tallest panel (Case Studies) whichever tab is open. */}
-        <main className="grid pb-16 lg:pb-0">
-          {tabs.map((t) => {
-            const selected = t.id === active;
-            return (
-              <section
-                key={t.id}
-                role="tabpanel"
-                id={`panel-${t.id}`}
-                aria-labelledby={`tab-${t.id}`}
-                aria-hidden={!selected}
-                tabIndex={selected ? 0 : -1}
-                className={`rounded-lg [grid-area:1/1] focus-visible:outline-none ${
-                  t.centered ? "flex items-center justify-center" : ""
-                } ${selected ? "" : "max-lg:hidden lg:invisible"}`}
-              >
-                {t.content}
-              </section>
-            );
-          })}
-        </main>
-
-        <div className="pb-10 lg:hidden">{footer}</div>
+      <div
+        role="tablist"
+        aria-label="Sections"
+        className="flex items-center gap-2"
+      >
+        {tabs.map((t, i) => (t.bottom ? null : renderTab(t, i)))}
       </div>
-    </div>
-  );
-}
 
-function ArrowIcon({ className }: { className: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2.75}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-      className={className}
-    >
-      <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
+      {/* Panels share one grid cell, so the area keeps the height of the
+          tallest panel (Case Studies) whichever tab is open. */}
+      <main className="mt-14 grid w-full">
+        {tabs.map((t) => {
+          const selected = t.id === active;
+          return (
+            <section
+              key={t.id}
+              role="tabpanel"
+              id={`panel-${t.id}`}
+              aria-labelledby={`tab-${t.id}`}
+              aria-hidden={!selected}
+              tabIndex={selected ? 0 : -1}
+              className={`rounded-lg [grid-area:1/1] focus-visible:outline-none ${
+                t.centered ? "flex items-start justify-center" : ""
+              } ${selected ? "" : "invisible"}`}
+            >
+              {t.content}
+            </section>
+          );
+        })}
+      </main>
+
+      <footer className="pt-6 pb-12 text-center">{footer}</footer>
+    </div>
   );
 }
