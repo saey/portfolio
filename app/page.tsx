@@ -111,7 +111,7 @@ export default function Home() {
               >
                 saeworks
               </span>
-              <span className="mt-1.5 block text-base leading-snug font-medium text-[#5a5699] dark:text-[#acaacf]">
+              <span className="mt-1.5 block text-sm leading-snug sm:text-base font-medium text-[#5a5699] dark:text-[#acaacf]">
                 Product Design &amp; Strategy
               </span>
             </h1>
