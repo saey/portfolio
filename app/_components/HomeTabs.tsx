@@ -96,7 +96,7 @@ export function HomeTabs({
               : "font-bold text-[#4F46E5] dark:text-indigo-300"
             : t.bottom
               ? "font-medium text-neutral-600 hover:text-[#4329a6] dark:text-zinc-400 dark:hover:text-indigo-300"
-              : "font-medium text-[#64748B] hover:text-[#0F172A] dark:text-zinc-400 dark:hover:text-white"
+              : "font-medium text-[#7C78DB] hover:text-[#4F46E5] dark:text-indigo-300/60 dark:hover:text-indigo-300"
         }`}
       >
         {t.bottom ? (

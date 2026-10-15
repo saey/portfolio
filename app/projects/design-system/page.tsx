@@ -231,9 +231,9 @@ export default function DesignSystemCaseStudy() {
                 }
                 right={
                   <Block label="Outcome">
-                    <Em>I led a full refactor toward role-based semantic tokens,</Em>{" "}
-                    fixed accessibility at the component level, and aligned the
-                    library with AEM and engineering — using Claude for a token
+                    <Em>A full refactor toward role-based semantic tokens,</Em>{" "}
+                    accessibility fixed at the component level, and a library
+                    aligned with AEM and engineering — using Claude for a token
                     audit and Figma MCP for hand-off to code.
                   </Block>
                 }
