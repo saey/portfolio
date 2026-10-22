@@ -249,10 +249,10 @@ export default function DesignSystemCaseStudy() {
               <div className="grid gap-10 md:grid-cols-[auto_1fr] md:gap-16">
                 <Figure value="32 → 23" note="components · −28%" />
                 <Body>
-                  I reviewed every component through two lenses — the{" "}
+                  Every component was reviewed through two lenses — the{" "}
                   <Em>Authoring Experience (AX)</Em> in AEM, and the cost of
-                  maintaining it across design and development — then merged
-                  redundant structures and consolidated their variants.
+                  maintaining it across design and development — then redundant
+                  structures were merged and their variants consolidated.
                 </Body>
               </div>
               <List
@@ -294,8 +294,8 @@ export default function DesignSystemCaseStudy() {
 
               <Subhead>AI-assisted token audit</Subhead>
               <Body className="max-w-3xl">
-                Before changing anything, <Em>I audited the existing
-                variables and tokens with Claude</Em> — flagging invalid styles, duplicate values, overlong paths and
+                Before changing anything, <Em>the existing variables and
+                tokens were audited with Claude</Em> — flagging invalid styles, duplicate values, overlong paths and
                 structural gaps in the token hierarchy. What would have taken
                 days of manual inspection became a prioritized remediation plan
                 the team could review and agree on.
@@ -361,7 +361,7 @@ export default function DesignSystemCaseStudy() {
             {/* 03 */}
             <Section index="03" id="tokens" title="Token & Typography Architecture">
               <Lead>
-                I moved the system from element-bound tokens to{" "}
+                The system moved from element-bound tokens to{" "}
                 <Em>role-based semantic tokens</Em> — named for what a color
                 does, not where it appears. <Em>Theme is now only for color
                 switching,</Em> and Light and Dark resolve from the same set.
@@ -549,9 +549,9 @@ Brand         195`}
 
               <Subhead>Guides for authors and designers</Subhead>
               <Body className="max-w-3xl">
-                I created <Em>AEM-compatible component templates and design
+                <Em>AEM-compatible component templates and design
                 guidelines,</Em> along with accessibility guidelines for both
-                designers and content authors — so anyone can build accessible
+                designers and content authors, let anyone build accessible
                 pages without needing to know the system&apos;s internals.
               </Body>
               <div className="mt-10">
@@ -602,10 +602,10 @@ Brand         195`}
 
               <Subhead>Figma MCP: one structure for design and code</Subhead>
               <Body className="max-w-3xl">
-                I proposed Figma MCP to the development team as a shared bridge
+                Figma MCP was proposed to the development team as a shared bridge
                 between design and code. Instead of treating the design system as
-                data closed off inside Figma, <Em>I worked with engineers to make
-                the token and component structure MCP-friendly</Em> — semantic
+                data closed off inside Figma, <Em>the token and component structure
+                was made MCP-friendly together with engineers</Em> — semantic
                 tokens that map 1:1 to CSS classes, and auto layout aligned with
                 the CSS grid — so what designers build is what MCP hands to code.
               </Body>

@@ -123,8 +123,8 @@ export default function MoriPuzzleCaseStudy() {
       {/* 01 */}
       <Section index="01" id="problem" title="Problem Statement & User Research" first>
         <Lead>
-          Kanji is one of the biggest hurdles in learning Japanese. <Em>I surveyed and interviewed 25 people</Em>{" "}
-          interested in studying the language to find out where — and why — they give up.
+          Kanji is one of the biggest hurdles in learning Japanese. <Em>A survey and interviews with 25 people</Em>{" "}
+          interested in studying the language looked at where — and why — they give up.
         </Lead>
 
         <Subhead>Three barriers</Subhead>
@@ -238,7 +238,7 @@ export default function MoriPuzzleCaseStudy() {
       {/* 03 */}
       <Section index="03" id="heuristics" title="Competitive Heuristic Evaluation">
         <Lead>
-          I evaluated four apps against <Em>Nielsen Norman Group’s 10 usability heuristics,</Em> plus three criteria
+          Four apps were evaluated against <Em>Nielsen Norman Group’s 10 usability heuristics,</Em> plus three criteria
           specific to the problem: Learning, Motivation and Interactivity.
         </Lead>
 

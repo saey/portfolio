@@ -323,7 +323,7 @@ const NEXT_STEPS: [string, string][] = [
   ["SI Partner Portal", "Automatic reminders with the bill template attached."],
   [
     "Auto-sent invoices",
-    "Without digitized SOWs, users may not trust fully automated billing, so I designed the ideal post-MVP flow for when they are.",
+    "Without digitized SOWs, users may not trust fully automated billing, so this is the ideal post-MVP flow, designed for when they are.",
   ],
 ];
 
@@ -409,9 +409,9 @@ export default function QuorkBoardBillingCaseStudy() {
       {/* 02 */}
       <Section index="02" id="discovery" title="Discovery & Requirements">
         <Lead>
-          I interviewed{" "}
+          Interviews with{" "}
           <Em>four engagement managers and the Operations team,</Em> alongside
-          finance SMEs, to map the current process, its pain points and what
+          finance SMEs, mapped the current process, its pain points and what
           each team needed — the findings that set the product scope.
         </Lead>
 
@@ -428,10 +428,9 @@ export default function QuorkBoardBillingCaseStudy() {
               Requirement cheat sheet
             </h3>
             <Body className="mt-6">
-              With the Operations and Finance teams, I built{" "}
-              <Em>a shared requirement cheat sheet</Em> — starting from
-              interview findings and flow walkthroughs, and mapping each need
-              directly to system scope. It became the baseline every later
+              <Em>A shared requirement cheat sheet,</Em> built with the
+              Operations and Finance teams, started from interview findings and
+              flow walkthroughs and mapped each need directly to system scope. It became the baseline every later
               decision was checked against.
             </Body>
           </div>
@@ -452,9 +451,9 @@ export default function QuorkBoardBillingCaseStudy() {
       {/* 03 */}
       <Section index="03" id="architecture" title="Architecture & Workflows">
         <Lead>
-          I mapped the current flows from the interviews to find{" "}
-          <Em>where automation could replace manual checks,</Em> then digitized
-          them end to end.
+          The current flows, mapped from the interviews, showed{" "}
+          <Em>where automation could replace manual checks,</Em> and were then
+          digitized end to end.
         </Lead>
 
         <div className="mt-12">

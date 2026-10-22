@@ -94,11 +94,11 @@ export function ProductWalkthrough({ flows }: { flows: WalkthroughFlow[] }) {
           >
             {step.image}
           </div>
-          <figcaption className="mt-4 flex flex-wrap items-start justify-between gap-4">
-            <p className="max-w-md text-sm leading-6 text-zinc-500 dark:text-zinc-400">
+          <figcaption className="mt-4 flex items-start justify-between gap-4">
+            <p className="min-w-0 max-w-md flex-1 text-sm leading-6 text-zinc-500 dark:text-zinc-400">
               {step.note ?? step.caption}
             </p>
-            <span className="flex gap-2">
+            <span className="flex shrink-0 gap-2">
               <StepButton
                 label="Previous step"
                 disabled={index === 0}
