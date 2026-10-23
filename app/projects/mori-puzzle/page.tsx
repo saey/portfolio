@@ -38,7 +38,7 @@ const SECTIONS = [
 ] as const;
 
 const META: Meta[] = [
-  { label: "Role", value: "Lead Product & UX Designer" },
+  { label: "Type", value: "Personal project" },
   { label: "Platform", value: "iOS / Mobile" },
   { label: "Tooling", value: "Figma · User Research" },
 ];
