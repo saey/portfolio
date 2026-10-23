@@ -68,6 +68,7 @@ const PROJECTS: Project[] = [
       name: "GridUnification",
       alt: "Unified grid filter, date picker and column components",
     },
+    href: "/projects/grid-unification",
   },
 ];
 
