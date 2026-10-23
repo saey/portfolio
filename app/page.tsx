@@ -4,6 +4,7 @@ import { ContactForm } from "./_components/ContactForm";
 import { rounded } from "./fonts";
 import { HomeTabs, INK } from "./_components/HomeTabs";
 import { ImageSlot } from "./projects/_components/ImageSlot";
+import { isHidden } from "./projects/hidden";
 
 export const metadata: Metadata = {
   title: "saeworks — Product Design & Strategy",
@@ -70,6 +71,54 @@ const PROJECTS: Project[] = [
     },
     href: "/projects/grid-unification",
   },
+  {
+    index: "05",
+    title: "Quork Board: Financial Analysis",
+    summary:
+      "Turning Excel-based reporting into portfolio, project and client financial analysis for operations and leadership.",
+    tags: ["Enterprise SaaS", "Financial Analysis", "Dashboards"],
+    image: {
+      name: "quorkboard-financial",
+      alt: "Quork Board financial analysis on a laptop",
+    },
+    href: "/projects/quorkboard-financial",
+  },
+  {
+    index: "06",
+    title: "Quork Board: Resourcing",
+    summary:
+      "Digitizing project staffing — from an engagement manager's request to the Operations team's talent assignment.",
+    tags: ["Enterprise SaaS", "Workflow Design", "User Flows"],
+    image: {
+      name: "Quork+Board+-+Resourcing",
+      alt: "Quork Board resourcing screens",
+    },
+    href: "/projects/quorkboard-resourcing",
+  },
+  {
+    index: "07",
+    title: "FGA Planning Dashboard",
+    summary:
+      "A planning dashboard that helps Financial Advisors review and act on client plans around a third-party tool.",
+    tags: ["Wealth Management", "Dashboard", "UX Research"],
+    image: {
+      name: "Apple+Cinema+display+in+home+office",
+      alt: "FGA planning dashboard on a desktop display",
+    },
+    href: "/projects/fga",
+  },
+  {
+    index: "08",
+    title: "UBS Client Discovery",
+    summary:
+      "Helping Financial Advisors discover, capture and recall what matters to each client, on desktop and mobile.",
+    tags: ["Wealth Management", "Concept Testing", "Desktop & Mobile"],
+    image: {
+      name: "ubs-client-discovery",
+      alt: "Client discovery platform on desktop and mobile",
+    },
+    href: "/projects/ubs-client-discovery",
+  },
 ];
 
 const FOCUS = [
@@ -78,6 +127,15 @@ const FOCUS = [
   "Design Systems",
   "Accessibility",
   "Mentorship",
+];
+
+const PRODUCTS = [
+  "CMS",
+  "CRM",
+  "Dashboard",
+  "Financial Applications",
+  "Management Tools",
+  "B2B / B2C",
 ];
 
 const CLIENTS = [
@@ -123,7 +181,7 @@ export default function Home() {
               label: "Case Studies",
               content: (
                 <ul className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-                  {PROJECTS.map((p) => (
+                  {PROJECTS.filter((p) => !p.href || !isHidden(p.href)).map((p) => (
                     <li key={p.index}>
                       <ProjectTile project={p} />
                     </li>
@@ -137,8 +195,9 @@ export default function Home() {
               centered: true,
               content: (
                 <div className="flex flex-wrap justify-center gap-x-20 gap-y-12 text-center">
-                  <AboutList label="Core Focus" items={FOCUS} />
                   <AboutList label="Brands" items={CLIENTS} />
+                  <AboutList label="Core Focus" items={FOCUS} />
+                  <AboutList label="Product" items={PRODUCTS} />
                 </div>
               ),
             },

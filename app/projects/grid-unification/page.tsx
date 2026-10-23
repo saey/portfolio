@@ -15,6 +15,7 @@ import {
 } from "../_components/editorial";
 import { ImageSlot } from "../_components/ImageSlot";
 import { ImageTabs } from "../_components/ImageTabs";
+import { Card, Shot, Wide } from "../_components/Shot";
 
 export const metadata: Metadata = {
   title: "Grid UI Unification — Case Study",
@@ -214,72 +215,6 @@ const GUIDE_PAGES = [
 
 const DATA_TYPES = ["Free text", "Single select", "Multi select", "Numeric", "Calendar"];
 
-/** Screenshot shown whole inside a white frame, so neighbors share one height. */
-function Shot({
-  name,
-  alt,
-  aspect,
-  sizes = "(min-width: 1024px) 560px, (min-width: 768px) 50vw, 100vw",
-}: {
-  name: string;
-  alt: string;
-  aspect: string;
-  sizes?: string;
-}) {
-  return (
-    <div className="rounded-xl border border-neutral-200 bg-white p-4 sm:p-6 dark:border-zinc-800">
-      <ImageSlot
-        dir={DIR}
-        name={name}
-        alt={alt}
-        aspect={aspect}
-        fit="contain"
-        sizes={sizes}
-        className="!bg-transparent"
-      />
-    </div>
-  );
-}
-
-/** Screenshot with a short title and note underneath. */
-function Card({
-  name,
-  title,
-  text,
-  aspect = "aspect-[4/3]",
-}: {
-  name: string;
-  title: string;
-  text: string;
-  aspect?: string;
-}) {
-  return (
-    <figure>
-      <Shot name={name} alt={`${title}: ${text}`} aspect={aspect} />
-      <figcaption className="mt-4">
-        <span className="block font-semibold text-neutral-900 dark:text-white">{title}</span>
-        <span className="mt-1.5 block text-[13px] leading-[1.6] text-zinc-600 dark:text-zinc-400">
-          {text}
-        </span>
-      </figcaption>
-    </figure>
-  );
-}
-
-function Wide({ name, alt, aspect }: { name: string; alt: string; aspect: string }) {
-  return (
-    <ImageSlot
-      dir={DIR}
-      name={name}
-      alt={alt}
-      aspect={aspect}
-      fit="contain"
-      sizes="(min-width: 1280px) 1000px, 100vw"
-      className="!bg-transparent"
-    />
-  );
-}
-
 export default function GridUnificationCaseStudy() {
   return (
     <CaseStudyLayout
@@ -326,7 +261,7 @@ export default function GridUnificationCaseStudy() {
       {/* 02 */}
       <Section index="02" id="ecosystem" title="Understanding the Ecosystem">
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-14">
-          <Shot
+          <Shot dir={DIR}
             name="hierarchy"
             alt="Hierarchy: GS Design System and UITK, Marquee, and Prime Service applications"
             aspect="aspect-[1612/1964]"
@@ -336,7 +271,7 @@ export default function GridUnificationCaseStudy() {
 
         <Subhead>Current ecosystem</Subhead>
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <Shot
+          <Shot dir={DIR}
             name="ecosystem-current"
             alt="Current ecosystem: GS and Marquee guides, UITK and Prime Service applications are not aligned"
             aspect="aspect-[908/646]"
@@ -360,7 +295,7 @@ export default function GridUnificationCaseStudy() {
 
         <Subhead>Target state</Subhead>
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <Shot
+          <Shot dir={DIR}
             name="ecosystem-target"
             alt="Target state: Prime Service use cases added to the Marquee guide and library, with grid components stored in a shared library"
             aspect="aspect-[1201/810]"
@@ -407,7 +342,7 @@ export default function GridUnificationCaseStudy() {
               id: f.id,
               label: f.label,
               image: (
-                <Wide
+                <Wide dir={DIR}
                   name={f.name}
                   alt={`${f.label} audit: each pattern in use and the applications that use it`}
                   aspect="aspect-[3/1]"
@@ -431,7 +366,7 @@ export default function GridUnificationCaseStudy() {
 
         <Subhead>Good to use as is</Subhead>
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <Shot
+          <Shot dir={DIR}
             name="marquee-bulk-actions"
             alt="Marquee bulk actions bar"
             aspect="aspect-[456/167]"
@@ -446,14 +381,14 @@ export default function GridUnificationCaseStudy() {
         <Subhead>Needs enhancement or a variation</Subhead>
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {NEEDS_WORK.map((c) => (
-            <Card key={c.name} {...c} />
+            <Card dir={DIR} key={c.name} {...c} />
           ))}
         </div>
 
         <Subhead>Missing components</Subhead>
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {MISSING.map((c) => (
-            <Card key={c.name} {...c} />
+            <Card dir={DIR} key={c.name} {...c} />
           ))}
         </div>
       </Section>
@@ -467,12 +402,12 @@ export default function GridUnificationCaseStudy() {
         </Lead>
 
         <div className="mt-12 grid items-start gap-8 md:grid-cols-[minmax(0,852fr)_minmax(0,1474fr)]">
-          <Shot
+          <Shot dir={DIR}
             name="filter-research"
             alt="Global filter user testing plan"
             aspect="aspect-[852/913]"
           />
-          <Shot
+          <Shot dir={DIR}
             name="filter-research-result"
             alt="Global filter user testing results"
             aspect="aspect-[1474/791]"
@@ -500,7 +435,7 @@ export default function GridUnificationCaseStudy() {
 
         <Subhead>Engineering feasibility</Subhead>
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <Shot
+          <Shot dir={DIR}
             name="filter-feasibility"
             alt="AG-Grid filter capabilities mapped against use cases"
             aspect="aspect-[1610/1521]"
@@ -525,7 +460,7 @@ export default function GridUnificationCaseStudy() {
               ))}
             </ul>
           </div>
-          <Shot
+          <Shot dir={DIR}
             name="filter-variations"
             alt="Filter variations for each data type"
             aspect="aspect-[1357/1542]"
@@ -548,7 +483,7 @@ export default function GridUnificationCaseStudy() {
               label: c.label,
               caption: c.caption,
               image: (
-                <Wide
+                <Wide dir={DIR}
                   name={c.name}
                   alt={`${c.label}: the Marquee component beside the new variation`}
                   aspect="aspect-[921/460]"
@@ -561,7 +496,7 @@ export default function GridUnificationCaseStudy() {
         <Subhead>New components</Subhead>
         <div className="grid gap-x-10 gap-y-12 md:grid-cols-2">
           {NEW_COMPONENTS.map((c) => (
-            <Card key={c.name} {...c} aspect="aspect-[921/435]" />
+            <Card dir={DIR} key={c.name} {...c} aspect="aspect-[921/435]" />
           ))}
         </div>
       </Section>
@@ -576,7 +511,7 @@ export default function GridUnificationCaseStudy() {
 
         <Subhead>Marquee Design Guide</Subhead>
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <Shot
+          <Shot dir={DIR}
             name="dg-overview"
             alt="Grid section of the Marquee Design Guide"
             aspect="aspect-[939/540]"
@@ -597,7 +532,7 @@ export default function GridUnificationCaseStudy() {
               label: g.label,
               caption: g.caption,
               image: (
-                <Wide
+                <Wide dir={DIR}
                   name={g.name}
                   alt={`Design Guide, ${g.label}: ${g.caption}`}
                   aspect="aspect-[3/2]"
@@ -609,12 +544,12 @@ export default function GridUnificationCaseStudy() {
 
         <Subhead>Marquee Figma Library</Subhead>
         <div className="grid items-start gap-8 md:grid-cols-2">
-          <Shot
+          <Shot dir={DIR}
             name="library-filter"
             alt="Side Filter component in the Figma Library"
             aspect="aspect-[973/773]"
           />
-          <Shot
+          <Shot dir={DIR}
             name="library-action-bar"
             alt="Prime Service Action Bar component in the Figma Library"
             aspect="aspect-[973/773]"
@@ -629,7 +564,7 @@ export default function GridUnificationCaseStudy() {
         </ul>
 
         <Subhead>Prime Service grid application template</Subhead>
-        <Shot
+        <Shot dir={DIR}
           name="prime-template"
           alt="Prime Service grid application template"
           aspect="aspect-[1427/577]"
@@ -645,7 +580,7 @@ export default function GridUnificationCaseStudy() {
       {/* 08 */}
       <Section index="08" id="engineering" title="Engineering Implementation">
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <Shot
+          <Shot dir={DIR}
             name="engineering-result"
             alt="Result: grid components stored in a Prime Service shared repository"
             aspect="aspect-[908/646]"

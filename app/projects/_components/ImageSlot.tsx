@@ -4,7 +4,8 @@ import Image from "next/image";
 
 /** Default image folder: /public/projects/design-system/<name>.<ext>. Other pages pass `dir`. */
 const PUBLIC_DIR = "projects/design-system";
-const EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif", "gif"];
+/** mp4 is a screen recording converted from a GIF; it plays like one. */
+const EXTENSIONS = ["png", "jpg", "jpeg", "webp", "avif", "gif", "mp4"];
 
 export type ImageAsset = {
   /** File basename without extension, e.g. "tokens-after". */
@@ -102,7 +103,19 @@ export function ImageSlot({
     <div
       className={`relative w-full overflow-hidden bg-zinc-100 dark:bg-zinc-900 ${aspect} ${className}`}
     >
-      {src ? (
+      {src?.endsWith(".mp4") ? (
+        <video
+          src={src}
+          aria-label={alt}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className={`absolute inset-0 h-full w-full ${fit === "cover" ? "object-cover" : "object-contain"} ${
+            position === "top" ? "object-top" : "object-center"
+          }`}
+        />
+      ) : src ? (
         <Image
           src={src}
           alt={alt}
