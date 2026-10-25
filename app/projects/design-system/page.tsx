@@ -156,7 +156,7 @@ const SECTIONS = [
 ] as const;
 
 const META = [
-  { label: "Role", value: "Lead Product Designer & Director" },
+  { label: "Role", value: "Lead Product Designer" },
   { label: "Team", value: "5 IC designers, 4 product owners" },
   { label: "Platform", value: "Figma · AEM" },
   { label: "Tooling", value: "Claude · Figma MCP" },
